@@ -1,3 +1,4 @@
+/* General body styling */
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   text-align: center;
@@ -6,13 +7,26 @@ body {
   padding: 0;
 }
 
-/* Header */
-h1 {
+/* Header styling */
+header {
+  background: linear-gradient(135deg, #74ebd5, #acb6e5);
   color: white;
-  margin-top: 20px;
+  padding: 40px 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
-/* Navigation */
+header h1 {
+  margin: 0;
+  font-size: 2.2em;
+}
+
+header p {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+/* Navigation styling */
 nav {
   margin: 20px 0;
 }
@@ -33,28 +47,45 @@ nav a:hover {
   color: #3498db;
 }
 
-/* Card Sections */
-section {
+/* Card styling for sections (About / Steps / Pages) */
+.card, section {
   background: white;
   margin: 20px auto;
   padding: 20px;
-  width: 320px;
+  width: 350px;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* Inputs */
+/* Paragraphs in cards */
+.card p {
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+/* Links inside cards */
+.card a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
+
+/* Input fields */
 input {
   margin: 8px;
   padding: 8px;
   border-radius: 8px;
   border: 1px solid #ccc;
   width: 70%;
+  font-size: 1em;
 }
 
-/* Buttons */
+/* Buttons styling */
 button {
-  background: #ff7a18;
   background: linear-gradient(45deg, #ff7a18, #ffb347);
   border: none;
   padding: 8px 14px;
@@ -74,10 +105,20 @@ button:active {
   transform: scale(0.95);
 }
 
-/* List Items */
-ul {
+/* Lists */
+ul, ol {
   list-style: none;
   padding: 0;
+  text-align: left;
+}
+
+ol {
+  padding-left: 20px;
+}
+
+ol li {
+  margin: 8px 0;
+  line-height: 1.5;
 }
 
 li {
@@ -91,9 +132,22 @@ li {
   align-items: center;
 }
 
-/* Delete Button */
+/* Delete buttons for list items */
 li button {
   background: #ff4d4d;
   padding: 5px 8px;
   font-size: 12px;
+  border-radius: 5px;
+}
+
+/* Small responsiveness for mobile */
+@media screen and (max-width: 400px) {
+  .card, section {
+    width: 90%;
+    padding: 15px;
+  }
+
+  input {
+    width: 90%;
+  }
 }
