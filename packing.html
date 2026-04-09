@@ -1,22 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Packing List</title>
+  <meta charset="UTF-8">
+  <title>Itinera - Packing List</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Packing List</h1>
+  <header>
+    <h1>Packing List 🎒</h1>
+    <p>Keep track of what to bring on your trip!</p>
+  </header>
 
-  <nav>
+  <!-- Navigation below header -->
+  <nav class="top-nav">
     <a href="index.html">Home</a>
+    <a href="itinerary.html">Itinerary</a>
+    <a href="expenses.html">Expenses</a>
   </nav>
 
-  <input type="text" id="packingInput" placeholder="Add item">
-  <button onclick="addPacking()">Add</button>
+  <section class="card">
+    <h2>Add Item</h2>
 
-  <ul id="packingList"></ul>
+    <!-- Input and Add button -->
+    <div class="input-row">
+      <input type="text" id="itemInput" placeholder="Packing item">
+      <button onclick="addItem()">Add</button>
+    </div>
 
-  <script src="script.js"></script>
+    <!-- Packing list -->
+    <ul id="packingList">
+      <!-- Items will appear here -->
+    </ul>
+  </section>
+
+  <!-- Link external JavaScript -->
+  <script src="packing.js"></script>
+
 </body>
 </html>
