@@ -63,8 +63,8 @@ header p {
   background: white;
   margin: 20px auto;
   padding: 20px;
-  width: 90%;        /* Relative width */
-  max-width: 600px;  /* Limit max width */
+  width: 95%;        /* make it expand almost full width */
+  max-width: 800px;  /* Optional: limit extremely wide screens */
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   box-sizing: border-box;
