@@ -182,3 +182,22 @@ li button {
     max-width: 100%;
   }
 }
+
+/* Align activity input, date input, and button in a row */
+.input-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.input-row input[type="text"],
+.input-row input[type="date"] {
+  flex: 1 1 150px;  /* Grow to fit but not too small */
+  max-width: 200px;
+}
+
+.input-row button {
+  flex: 0 0 auto;
+}

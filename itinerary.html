@@ -1,22 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Itinerary</title>
+  <meta charset="UTF-8">
+  <title>Itinera - Itinerary</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Itinerary</h1>
+  <header>
+    <h1>Itinerary ✈️</h1>
+    <p>Plan your trip activities and dates!</p>
+  </header>
 
-  <nav>
+  <!-- Navigation below header -->
+  <nav class="top-nav">
     <a href="index.html">Home</a>
+    <a href="packing.html">Packing List</a>
+    <a href="expenses.html">Expenses</a>
   </nav>
 
-  <input type="text" id="itineraryInput" placeholder="Add activity">
-  <button onclick="addItinerary()">Add</button>
+  <section class="card">
+    <h2>Add Activity</h2>
 
-  <ul id="itineraryList"></ul>
+    <div class="input-row">
+      <input type="text" id="activityInput" placeholder="Activity name">
+      <input type="date" id="dateInput">
+      <button onclick="addActivity()">Add</button>
+    </div>
 
-  <script src="script.js"></script>
+    <ol id="activityList">
+      <!-- Activities will appear here -->
+    </ol>
+  </section>
+
+  <!-- Link the external JavaScript file -->
+  <script src="itinerary.js"></script>
+
 </body>
 </html>
