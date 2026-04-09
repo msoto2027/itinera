@@ -1,43 +1,99 @@
 body {
-  font-family: Arial;
+  font-family: 'Segoe UI', Arial, sans-serif;
   text-align: center;
-  background: #f4f4f4;
+  background: linear-gradient(135deg, #74ebd5, #acb6e5);
+  margin: 0;
+  padding: 0;
 }
 
+/* Header */
 h1 {
-  color: #2c3e50;
+  color: white;
+  margin-top: 20px;
 }
 
+/* Navigation */
 nav {
-  margin: 15px;
+  margin: 20px 0;
 }
 
 nav a {
-  margin: 0 10px;
+  margin: 0 12px;
   text-decoration: none;
-  color: #3498db;
+  color: white;
   font-weight: bold;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: 0.3s;
 }
 
+nav a:hover {
+  background: white;
+  color: #3498db;
+}
+
+/* Card Sections */
+section {
+  background: white;
+  margin: 20px auto;
+  padding: 20px;
+  width: 320px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Inputs */
 input {
-  margin: 5px;
-  padding: 5px;
+  margin: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 70%;
 }
 
+/* Buttons */
 button {
-  padding: 5px 10px;
+  background: #ff7a18;
+  background: linear-gradient(45deg, #ff7a18, #ffb347);
+  border: none;
+  padding: 8px 14px;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
+button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* List Items */
 ul {
   list-style: none;
   padding: 0;
 }
 
 li {
-  margin: 5px;
+  background: #f9f9f9;
+  margin: 8px auto;
+  padding: 8px;
+  border-radius: 8px;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+/* Delete Button */
 li button {
-  margin-left: 10px;
+  background: #ff4d4d;
+  padding: 5px 8px;
+  font-size: 12px;
 }
