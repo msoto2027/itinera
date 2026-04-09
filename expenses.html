@@ -1,25 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Expenses</title>
+  <meta charset="UTF-8">
+  <title>Itinera - Expense Tracker</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Expense Tracker</h1>
+  <header>
+    <h1>Expense Tracker 💰</h1>
+    <p>Keep track of your travel expenses!</p>
+  </header>
 
-  <nav>
+  <!-- Navigation below header -->
+  <nav class="top-nav">
     <a href="index.html">Home</a>
+    <a href="itinerary.html">Itinerary</a>
+    <a href="packing.html">Packing List</a>
   </nav>
 
-  <input type="text" id="expenseName" placeholder="Expense name">
-  <input type="number" id="expenseAmount" placeholder="Amount">
-  <button onclick="addExpense()">Add</button>
+  <section class="card">
+    <h2>Add Expense</h2>
 
-  <ul id="expenseList"></ul>
+    <!-- Inputs and Add button -->
+    <div class="input-row">
+      <input type="text" id="expenseName" placeholder="Expense Name">
+      <input type="number" id="expenseAmount" placeholder="Amount" step="0.01">
+      <input type="date" id="expenseDate">
+      <button onclick="addExpense()">Add</button>
+    </div>
 
-  <h3>Total: $<span id="total">0</span></h3>
+    <!-- Expense list -->
+    <ol id="expenseList">
+      <!-- Expenses will appear here -->
+    </ol>
+  </section>
 
-  <script src="script.js"></script>
+  <!-- Link external JavaScript -->
+  <script src="expenses.js"></script>
+
 </body>
 </html>

@@ -193,8 +193,13 @@ li button {
 }
 
 .input-row input[type="text"],
-.input-row input[type="date"] {
+.input-row input[type="number"]
+{
   flex: 1 1 150px;  /* Grow to fit but not too small */
+  max-width: 200px;
+}
+.input-row input[type="date"] {
+  flex: 1 1 200px;  /* Grow to fit but not too small */
   max-width: 200px;
 }
 
