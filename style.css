@@ -8,16 +8,36 @@ h1 {
   color: #2c3e50;
 }
 
-section {
-  background: white;
-  margin: 20px auto;
-  padding: 15px;
-  width: 300px;
-  border-radius: 10px;
+nav {
+  margin: 15px;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #3498db;
+  font-weight: bold;
+}
+
+input {
+  margin: 5px;
+  padding: 5px;
 }
 
 button {
-  margin-top: 5px;
   padding: 5px 10px;
   cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 5px;
+}
+
+li button {
+  margin-left: 10px;
 }
