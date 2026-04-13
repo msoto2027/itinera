@@ -1,68 +1,44 @@
-// Itinerary
-function addItinerary() {
-  let input = document.getElementById("itineraryInput");
-  let li = document.createElement("li");
+const THEME_KEY = "itinera-theme";
+const DARK_CLASS = "dark-mode";
 
-  li.textContent = input.value + " ";
+function applyTheme(mode) {
+  const isDark = mode === "dark";
+  document.body.classList.toggle(DARK_CLASS, isDark);
 
-  let btn = document.createElement("button");
-  btn.textContent = "Delete";
-  btn.onclick = () => li.remove();
-
-  li.appendChild(btn);
-  document.getElementById("itineraryList").appendChild(li);
-
-  input.value = "";
+  const toggle = document.querySelector(".theme-toggle");
+  if (toggle) {
+    toggle.textContent = isDark ? "Light Mode" : "Dark Mode";
+    toggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+  }
 }
 
-// Packing
-function addPacking() {
-  let input = document.getElementById("packingInput");
-  let li = document.createElement("li");
-
-  li.textContent = input.value + " ";
-
-  let btn = document.createElement("button");
-  btn.textContent = "Delete";
-  btn.onclick = () => li.remove();
-
-  li.appendChild(btn);
-  document.getElementById("packingList").appendChild(li);
-
-  input.value = "";
+function getInitialTheme() {
+  const stored = localStorage.getItem(THEME_KEY);
+  if (stored === "dark" || stored === "light") {
+    return stored;
+  }
+  return "light";
 }
 
-// Expenses
-let total = 0;
+function addThemeToggle() {
+  if (document.body.querySelector(".theme-toggle")) {
+    return;
+  }
 
-function addExpense() {
-  let name = document.getElementById("expenseName").value;
-  let amount = parseFloat(document.getElementById("expenseAmount").value);
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "theme-toggle";
+  document.body.appendChild(toggle);
 
-  if (!name || isNaN(amount)) return;
-
-  let li = document.createElement("li");
-  li.textContent = `${name}: $${amount.toFixed(2)} `;
-
-  let btn = document.createElement("button");
-  btn.textContent = "Delete";
-
-  btn.onclick = () => {
-    total -= amount;
-    updateTotal();
-    li.remove();
-  };
-
-  li.appendChild(btn);
-  document.getElementById("expenseList").appendChild(li);
-
-  total += amount;
-  updateTotal();
-
-  document.getElementById("expenseName").value = "";
-  document.getElementById("expenseAmount").value = "";
+  toggle.addEventListener("click", () => {
+    const isDark = document.body.classList.contains(DARK_CLASS);
+    const nextMode = isDark ? "light" : "dark";
+    localStorage.setItem(THEME_KEY, nextMode);
+    applyTheme(nextMode);
+  });
 }
 
-function updateTotal() {
-  document.getElementById("total").textContent = total.toFixed(2);
-}
+document.addEventListener("DOMContentLoaded", () => {
+  addThemeToggle();
+  applyTheme(getInitialTheme());
+});

@@ -82,10 +82,39 @@ header p {
   box-shadow: 0 6px 14px rgba(241, 110, 82, 0.3);
 }
 
+.theme-toggle {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 999;
+  color: #ffffff;
+  font-family: 'Baloo 2', cursive;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  background: linear-gradient(135deg, #4ca8ba, #5fc89e);
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  padding: 8px 14px;
+  border-radius: 999px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 6px 14px rgba(74, 157, 171, 0.26);
+  width: auto;
+}
+
 .top-nav a:hover {
   transform: translateY(-2px);
   filter: saturate(1.08);
   box-shadow: 0 10px 18px rgba(241, 110, 82, 0.34);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  filter: saturate(1.08);
+  box-shadow: 0 10px 18px rgba(74, 157, 171, 0.32);
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.75);
+  outline-offset: 2px;
 }
 
 .card,
@@ -423,6 +452,151 @@ li button {
   border-right: 5px solid rgba(91, 184, 200, 0.45);
 }
 
+.packing-page .card h2,
+.expenses-page .card h2 {
+  color: #244851;
+}
+
+.packing-page .input-row > button,
+.expenses-page .input-row > button {
+  color: #ffffff;
+  background: linear-gradient(135deg, #ef795e, #cf4f38);
+}
+
+#packingList li,
+#expenseList li {
+  color: #2e4d56;
+}
+
+#expenseList li strong {
+  color: #b84c35;
+}
+
+body.dark-mode {
+  --ink-main: #e6f4f8;
+  --ink-soft: #c8dce2;
+  --card: #1b2a31;
+  --line-soft: #47636d;
+  --accent-main: #ff8f70;
+  --accent-deep: #e26950;
+  --accent-blue: #66c6d8;
+  --shadow-soft: 0 14px 30px rgba(0, 0, 0, 0.35);
+  --shadow-pop: 0 10px 16px rgba(0, 0, 0, 0.28);
+  color: var(--ink-main);
+  background:
+    radial-gradient(circle at 14% 16%, rgba(74, 117, 127, 0.35) 0%, rgba(74, 117, 127, 0) 30%),
+    radial-gradient(circle at 90% 10%, rgba(88, 131, 95, 0.3) 0%, rgba(88, 131, 95, 0) 28%),
+    linear-gradient(160deg, #111d23 0%, #17282f 48%, #223037 100%);
+}
+
+body.dark-mode header {
+  background:
+    linear-gradient(130deg, rgba(34, 83, 94, 0.95), rgba(38, 98, 111, 0.9)),
+    linear-gradient(240deg, rgba(143, 74, 63, 0.95), rgba(112, 62, 54, 0.86));
+}
+
+body.dark-mode .card,
+body.dark-mode section {
+  border-color: rgba(83, 121, 131, 0.9);
+}
+
+body.dark-mode .card p,
+body.dark-mode .tutorial-link span,
+body.dark-mode .about-box p,
+body.dark-mode .tutorial-box p {
+  color: #d3e6eb;
+}
+
+body.dark-mode .about-box,
+body.dark-mode .tutorial-box,
+body.dark-mode .destinations-page .card,
+body.dark-mode .packing-page .card,
+body.dark-mode .expenses-page .card {
+  background: linear-gradient(180deg, rgba(26, 42, 50, 0.96), rgba(22, 35, 42, 0.98));
+}
+
+body.dark-mode .tutorial-link,
+body.dark-mode li {
+  background: linear-gradient(155deg, rgba(30, 48, 56, 0.92), rgba(26, 40, 47, 0.96));
+  border-color: rgba(86, 128, 139, 0.78);
+}
+
+body.dark-mode .tutorial-link strong,
+body.dark-mode .card a {
+  color: #ffd8c6;
+}
+
+body.dark-mode .packing-page .card h2,
+body.dark-mode .expenses-page .card h2,
+body.dark-mode #packingList li,
+body.dark-mode #expenseList li {
+  color: #e9f7fb;
+}
+
+body.dark-mode #expenseList li strong {
+  color: #ffd6c6;
+}
+
+body.dark-mode .packing-page .input-row > button,
+body.dark-mode .expenses-page .input-row > button {
+  color: #ffffff;
+  background: linear-gradient(135deg, #f08b6d, #db6348);
+}
+
+body.dark-mode .top-nav a {
+  border-color: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .destinations-page h2::before {
+  background: rgba(102, 198, 216, 0.26);
+  color: #ecf9fc;
+}
+
+body.dark-mode input,
+body.dark-mode #calendar {
+  background: #122028;
+  color: var(--ink-main);
+  border-color: rgba(86, 128, 139, 0.82);
+}
+
+body.dark-mode input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(102, 198, 216, 0.22);
+}
+
+body.dark-mode .fc .fc-toolbar-title,
+body.dark-mode .fc .fc-col-header-cell-cushion,
+body.dark-mode .fc .fc-daygrid-day-number {
+  color: var(--ink-main);
+}
+
+body.dark-mode .fc-theme-standard td,
+body.dark-mode .fc-theme-standard th {
+  border-color: rgba(74, 110, 120, 0.65);
+}
+
+body.dark-mode .fc .fc-button {
+  background: linear-gradient(135deg, #de795e, #b75743);
+}
+
+body.dark-mode .theme-toggle {
+  background: linear-gradient(135deg, #3e8fa1, #4daf8b);
+  border-color: rgba(208, 236, 242, 0.86);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.34);
+}
+
+body.dark-mode .destinations-page,
+body.dark-mode .itinerary-page,
+body.dark-mode .packing-page,
+body.dark-mode .expenses-page,
+body.dark-mode .home-page {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(70, 110, 120, 0.35) 0%, rgba(70, 110, 120, 0) 30%),
+    radial-gradient(circle at 90% 10%, rgba(120, 88, 75, 0.3) 0%, rgba(120, 88, 75, 0) 28%),
+    linear-gradient(160deg, #101a20 0%, #16262c 50%, #1e2a31 100%);
+}
+
 @media screen and (max-width: 768px) {
   header {
     padding: 24px 12px 22px;
@@ -439,6 +613,14 @@ li button {
     width: calc(50% - 6px);
     text-align: center;
     padding: 10px 12px;
+  }
+
+  .theme-toggle {
+    top: 10px;
+    left: 10px;
+    width: auto;
+    padding: 7px 12px;
+    font-size: 0.88rem;
   }
 
   .card,
@@ -479,6 +661,11 @@ li button {
 @media screen and (max-width: 430px) {
   .top-nav a {
     width: 100%;
+  }
+
+  .theme-toggle {
+    top: 8px;
+    left: 8px;
   }
 
   header h1 {
