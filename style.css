@@ -326,6 +326,25 @@ li button {
   padding: 10px;
 }
 
+#destinationMap {
+  width: 100%;
+  height: 360px;
+  border-radius: 14px;
+  border: 2px solid rgba(91, 184, 200, 0.4);
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 10px;
+}
+
+.leaflet-popup-content {
+  margin: 10px 12px;
+  font-family: 'Nunito', sans-serif;
+  color: #2f4f57;
+}
+
 .fc .fc-toolbar-title {
   font-family: 'Baloo 2', cursive;
   color: var(--ink-main);
@@ -380,19 +399,6 @@ li button {
   border-style: dashed;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(253, 247, 236, 0.94));
-}
-
-.destinations-page h2::before {
-  content: "Map Stop";
-  display: inline-block;
-  margin-right: 8px;
-  padding: 2px 9px;
-  border-radius: 999px;
-  font-size: 0.55em;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  background: rgba(91, 184, 200, 0.18);
-  color: #417682;
 }
 
 .itinerary-page {
@@ -548,15 +554,14 @@ body.dark-mode .top-nav a {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-body.dark-mode .destinations-page h2::before {
-  background: rgba(102, 198, 216, 0.26);
-  color: #ecf9fc;
-}
-
 body.dark-mode input,
 body.dark-mode #calendar {
   background: #122028;
   color: var(--ink-main);
+  border-color: rgba(86, 128, 139, 0.82);
+}
+
+body.dark-mode #destinationMap {
   border-color: rgba(86, 128, 139, 0.82);
 }
 
@@ -655,6 +660,10 @@ body.dark-mode .home-page {
   li {
     max-width: none;
     font-size: 0.95rem;
+  }
+
+  #destinationMap {
+    height: 300px;
   }
 }
 
