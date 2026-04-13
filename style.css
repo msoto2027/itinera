@@ -48,14 +48,16 @@ header p {
   color: white;
   font-weight: bold;
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px 14px;
-  border-radius: 20px;
+  padding: 10px 16px;
+  border-radius: 25px;
   transition: 0.3s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .top-nav a:hover {
   background: white;
   color: #3498db;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
 /* -----------------------------
@@ -267,6 +269,10 @@ li button {
 #calendar {
   max-width: 100%;
   margin: 0 auto;
+}
+
+.destination-item {
+  text-align: center;
 }
 }
 .input-row input[type="date"] {

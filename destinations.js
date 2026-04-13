@@ -8,14 +8,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function addDestination() {
   const destinationInput = document.getElementById("destinationInput");
+  const startDateInput = document.getElementById("startDateInput");
+  const endDateInput = document.getElementById("endDateInput");
 
-  if (destinationInput.value.trim() === "") {
-    alert("Please enter a destination!");
+  if (destinationInput.value.trim() === "" || startDateInput.value === "" || endDateInput.value === "") {
+    alert("Please enter a destination, start date, and end date!");
     return;
   }
 
   const destination = {
     name: destinationInput.value,
+    startDate: startDateInput.value,
+    endDate: endDateInput.value,
     id: Date.now()
   };
 
@@ -25,12 +29,17 @@ function addDestination() {
   addToList(destination);
 
   destinationInput.value = "";
+  startDateInput.value = "";
+  endDateInput.value = "";
 }
 
 function addToList(destination) {
   const destinationList = document.getElementById("destinationList");
   const li = document.createElement("li");
-  li.innerHTML = `${destination.name} <button onclick="deleteDestination(${destination.id})">Delete</button>`;
+  const startDate = new Date(destination.startDate).toLocaleDateString();
+  const endDate = new Date(destination.endDate).toLocaleDateString();
+  li.className = "destination-item";
+  li.innerHTML = `<strong>${destination.name}</strong><br>From ${startDate} to ${endDate} <button onclick="deleteDestination(${destination.id})">Delete</button>`;
   destinationList.appendChild(li);
 }
 
