@@ -1,134 +1,151 @@
-/* -----------------------------
-   Body & General Styles
------------------------------ */
-body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  text-align: center;
-  background: linear-gradient(135deg, #74ebd5, #acb6e5);
-  margin: 0;
-  padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Nunito:wght@400;600;700&display=swap');
+
+:root {
+  --bg-sky: #d8f1f0;
+  --bg-cream: #fff8e8;
+  --bg-coral: #ffd3c2;
+  --ink-main: #325962;
+  --ink-soft: #53777d;
+  --card: #fffcf4;
+  --line-soft: #f4cdb5;
+  --accent-main: #ff8f70;
+  --accent-deep: #f16e52;
+  --accent-blue: #5bb8c8;
+  --shadow-soft: 0 14px 30px rgba(50, 89, 98, 0.14);
+  --shadow-pop: 0 12px 20px rgba(241, 110, 82, 0.24);
+}
+
+* {
   box-sizing: border-box;
 }
 
-/* -----------------------------
-   Header
------------------------------ */
+body {
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  color: var(--ink-main);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 25%),
+    radial-gradient(circle at 86% 8%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0) 24%),
+    linear-gradient(160deg, var(--bg-sky) 0%, var(--bg-cream) 46%, var(--bg-coral) 100%);
+  min-height: 100vh;
+}
+
 header {
-  background: linear-gradient(135deg, #74ebd5, #acb6e5);
-  color: white;
-  padding: 40px 20px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  background:
+    linear-gradient(130deg, rgba(91, 184, 200, 0.95), rgba(91, 184, 200, 0.85)),
+    linear-gradient(240deg, rgba(255, 143, 112, 0.95), rgba(255, 143, 112, 0.8));
+  color: #ffffff;
+  padding: 42px 20px 34px;
+  border-bottom-left-radius: 34px;
+  border-bottom-right-radius: 34px;
+  box-shadow: var(--shadow-soft);
 }
 
 header h1 {
   margin: 0;
-  font-size: 2.8em;
-  font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(2.3rem, 4.8vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
 }
 
 header p {
-  font-size: 1.2em;
-  margin-top: 10px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  opacity: 0.95;
 }
 
-/* -----------------------------
-   Navigation below header
------------------------------ */
 .top-nav {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin: 15px 0 30px 0; /* spacing below header */
+  margin: 16px 0 28px;
+  flex-wrap: wrap;
 }
 
 .top-nav a {
   text-decoration: none;
-  color: white;
-  font-weight: bold;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 10px 16px;
-  border-radius: 25px;
-  transition: 0.3s;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  color: #ffffff;
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.03rem;
+  letter-spacing: 0.3px;
+  background: linear-gradient(135deg, var(--accent-main), #ffaf73);
+  border: 2px solid rgba(255, 255, 255, 0.65);
+  padding: 9px 18px;
+  border-radius: 999px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 6px 14px rgba(241, 110, 82, 0.3);
 }
 
 .top-nav a:hover {
-  background: white;
-  color: #3498db;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+  filter: saturate(1.08);
+  box-shadow: 0 10px 18px rgba(241, 110, 82, 0.34);
 }
 
-/* -----------------------------
-   Card / Section Styling
------------------------------ */
-.card, section {
-  background: white;
+.card,
+section {
+  background: var(--card);
   margin: 20px auto;
-  padding: 20px;
-  width: 95%;        /* make it expand almost full width */
-  max-width: 800px;  /* Optional: limit extremely wide screens */
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  box-sizing: border-box;
-  text-align: left;  /* Align lists nicely */
+  padding: 22px;
+  width: 95%;
+  max-width: 860px;
+  border-radius: 18px;
+  border: 2px solid rgba(244, 205, 181, 0.75);
+  box-shadow: var(--shadow-soft);
+  text-align: left;
 }
 
-/* Paragraphs in cards */
+.card h2,
+section h2 {
+  margin-top: 0;
+  margin-bottom: 14px;
+  color: var(--ink-main);
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.9rem;
+  letter-spacing: 0.3px;
+}
+
 .card p {
-  font-size: 1em;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.62;
+  color: var(--ink-soft);
 }
 
-/* Links inside cards */
 .card a {
-  color: #3498db;
+  color: var(--accent-deep);
   text-decoration: none;
-  font-weight: bold;
-  background: rgba(52, 152, 219, 0.1);
+  font-weight: 700;
+  background: rgba(255, 143, 112, 0.14);
   padding: 4px 8px;
-  border-radius: 5px;
-  transition: 0.3s;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .card a:hover {
-  background: #3498db;
-  color: white;
-  text-decoration: none;
+  background: var(--accent-main);
+  color: #ffffff;
 }
 
-.about-box {
-  background: linear-gradient(135deg, #fff8ef, #ffe4c7);
-}
-
-.about-box h2 {
-  text-align: center;
-  color: #8a4b08;
-  margin-bottom: 12px;
-}
-
-.about-box p {
-  text-align: center;
-  color: #6a4b2f;
-  line-height: 1.7;
-  max-width: 680px;
-  margin: 0 auto;
-}
-
+.about-box,
 .tutorial-box {
-  background: linear-gradient(135deg, #fff8ef, #ffe4c7);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 251, 240, 0.92));
 }
 
-.tutorial-box h2 {
+.about-box h2,
+.tutorial-box h2,
+.about-box p,
+.tutorial-box p {
   text-align: center;
-  color: #8a4b08;
-  margin-bottom: 8px;
 }
 
 .tutorial-box p {
-  text-align: center;
-  color: #6a4b2f;
   margin-bottom: 20px;
 }
 
@@ -140,74 +157,78 @@ header p {
 
 .tutorial-link {
   display: block;
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(255, 166, 77, 0.35);
-  border-radius: 12px;
+  background: linear-gradient(165deg, #ffffff, #fff3e4);
+  border: 2px dashed rgba(241, 110, 82, 0.3);
+  border-radius: 14px;
   padding: 16px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.08);
   text-align: left;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
 .tutorial-link strong {
   display: block;
-  color: #c96c06;
-  font-size: 1.05em;
+  color: var(--accent-deep);
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.15rem;
   margin-bottom: 6px;
 }
 
 .tutorial-link span {
   display: block;
-  color: #6a4b2f;
+  color: var(--ink-soft);
   line-height: 1.5;
 }
 
 .tutorial-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 18px rgba(0, 0, 0, 0.12);
 }
 
-/* -----------------------------
-   Inputs
------------------------------ */
 input {
   margin: 8px 0;
-  padding: 8px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  width: 100%;         /* Fill card width */
-  max-width: 400px;    /* Limit maximum width */
-  font-size: 1em;
-  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 2px solid var(--line-soft);
+  width: 100%;
+  max-width: 420px;
+  font-size: 1rem;
+  font-family: 'Nunito', sans-serif;
+  color: var(--ink-main);
+  background: #fffdf8;
 }
 
-/* -----------------------------
-   Buttons
------------------------------ */
+input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(91, 184, 200, 0.2);
+}
+
 button {
-  background: linear-gradient(45deg, #ff7a18, #ffb347);
+  background: linear-gradient(135deg, var(--accent-main), var(--accent-deep));
   border: none;
-  padding: 8px 14px;
-  color: white;
-  font-weight: bold;
-  border-radius: 10px;
+  padding: 10px 16px;
+  color: #ffffff;
+  font-family: 'Baloo 2', cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 12px;
   cursor: pointer;
-  transition: 0.2s;
-  font-size: 1em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: var(--shadow-pop);
 }
 
 button:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
+  transform: translateY(-1px) scale(1.02);
+  filter: brightness(1.03);
 }
 
 button:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 
-/* -----------------------------
-   Lists (Packing / Itinerary / Expenses)
------------------------------ */
-ul, ol {
+ul,
+ol {
   padding: 0;
   list-style: none;
   text-align: left;
@@ -218,50 +239,32 @@ ol {
 }
 
 ol li {
-  margin: 8px 0;
-  line-height: 1.5;
+  margin: 10px 0;
+  line-height: 1.45;
 }
 
 li {
-  background: #f9f9f9;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.9), rgba(255, 245, 233, 0.95));
   margin: 8px auto;
-  padding: 8px;
-  border-radius: 8px;
-  width: 100%;       /* Responsive inside cards */
-  max-width: 500px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(244, 205, 181, 0.85);
+  width: 100%;
+  max-width: 520px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-sizing: border-box;
+  gap: 10px;
 }
 
-/* Delete buttons for list items */
 li button {
-  background: #ff4d4d;
-  padding: 5px 8px;
-  font-size: 12px;
-  border-radius: 5px;
+  background: linear-gradient(135deg, #ff7b7b, #ff5e72);
+  padding: 6px 10px;
+  font-size: 0.86rem;
+  border-radius: 8px;
+  box-shadow: none;
 }
 
-/* -----------------------------
-   Responsive adjustments
------------------------------ */
-@media screen and (max-width: 400px) {
-  .card, section {
-    width: 95%;
-    padding: 15px;
-  }
-
-  input {
-    width: 100%;
-  }
-
-  li {
-    max-width: 100%;
-  }
-}
-
-/* Align activity input, date input, and button in a row */
 .input-row {
   display: flex;
   flex-wrap: wrap;
@@ -271,42 +274,178 @@ li button {
 }
 
 .input-row input[type="text"],
-.input-row input[type="number"]
-{
-  flex: 1 1 150px;  /* Grow to fit but not too small */
-  max-width: 200px;
+.input-row input[type="number"] {
+  flex: 1 1 150px;
+  max-width: 210px;
 }
 
-/* -----------------------------
-   Mobile Responsiveness
------------------------------ */
+.input-row input[type="date"] {
+  flex: 1 1 200px;
+  max-width: 210px;
+}
+
+.input-row button {
+  flex: 0 0 auto;
+}
+
+#calendar {
+  max-width: 100%;
+  margin: 0 auto;
+  background: #fffdf8;
+  border-radius: 14px;
+  border: 2px solid var(--line-soft);
+  padding: 10px;
+}
+
+.fc .fc-toolbar-title {
+  font-family: 'Baloo 2', cursive;
+  color: var(--ink-main);
+}
+
+.fc .fc-button {
+  background: linear-gradient(135deg, var(--accent-main), var(--accent-deep));
+  border: none;
+}
+
+.fc .fc-daygrid-event {
+  border: none;
+  background: linear-gradient(135deg, var(--accent-blue), #76c6b7);
+}
+
+.destination-item {
+  text-align: center;
+}
+
+/* Page-specific moods while keeping one palette */
+.home-page {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0) 26%),
+    radial-gradient(circle at 80% 10%, rgba(255, 225, 209, 0.62) 0%, rgba(255, 225, 209, 0) 28%),
+    linear-gradient(160deg, #d7f0ef 0%, #fff9ed 48%, #ffd6c6 100%);
+}
+
+.home-page .tutorial-link:nth-child(1) {
+  border-color: rgba(91, 184, 200, 0.42);
+}
+
+.home-page .tutorial-link:nth-child(2) {
+  border-color: rgba(241, 110, 82, 0.45);
+}
+
+.home-page .tutorial-link:nth-child(3) {
+  border-color: rgba(132, 194, 110, 0.42);
+}
+
+.home-page .tutorial-link:nth-child(4) {
+  border-color: rgba(236, 160, 81, 0.45);
+}
+
+.destinations-page {
+  background:
+    radial-gradient(circle at 8% 16%, rgba(177, 227, 233, 0.65) 0%, rgba(177, 227, 233, 0) 28%),
+    radial-gradient(circle at 92% 14%, rgba(255, 214, 198, 0.68) 0%, rgba(255, 214, 198, 0) 24%),
+    linear-gradient(165deg, #dbf2f1 0%, #fff8e9 52%, #ffdccc 100%);
+}
+
+.destinations-page .card {
+  border-style: dashed;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(253, 247, 236, 0.94));
+}
+
+.destinations-page h2::before {
+  content: "Map Stop";
+  display: inline-block;
+  margin-right: 8px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 0.55em;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: rgba(91, 184, 200, 0.18);
+  color: #417682;
+}
+
+.itinerary-page {
+  background:
+    radial-gradient(circle at 18% 24%, rgba(255, 229, 213, 0.66) 0%, rgba(255, 229, 213, 0) 30%),
+    radial-gradient(circle at 86% 10%, rgba(173, 228, 221, 0.64) 0%, rgba(173, 228, 221, 0) 26%),
+    linear-gradient(160deg, #dcf2f0 0%, #fff7e5 50%, #ffd7c4 100%);
+}
+
+.itinerary-page #calendar {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(250, 255, 255, 0.94));
+  border-color: rgba(91, 184, 200, 0.4);
+}
+
+.itinerary-page .fc .fc-button {
+  box-shadow: 0 6px 12px rgba(74, 157, 171, 0.22);
+}
+
+.packing-page {
+  background:
+    radial-gradient(circle at 12% 22%, rgba(199, 234, 186, 0.6) 0%, rgba(199, 234, 186, 0) 28%),
+    radial-gradient(circle at 88% 9%, rgba(255, 221, 206, 0.64) 0%, rgba(255, 221, 206, 0) 26%),
+    linear-gradient(160deg, #e2f5ea 0%, #fff9ea 50%, #ffdaca 100%);
+}
+
+.packing-page li {
+  border-left: 5px solid rgba(132, 194, 110, 0.55);
+}
+
+.packing-page .card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(247, 255, 244, 0.95));
+}
+
+.expenses-page {
+  background:
+    radial-gradient(circle at 14% 20%, rgba(255, 220, 199, 0.68) 0%, rgba(255, 220, 199, 0) 30%),
+    radial-gradient(circle at 88% 14%, rgba(179, 223, 232, 0.62) 0%, rgba(179, 223, 232, 0) 24%),
+    linear-gradient(160deg, #def1f0 0%, #fff7ea 50%, #ffd4c1 100%);
+}
+
+.expenses-page .card {
+  border-style: solid;
+  border-width: 2px;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.96),
+      rgba(255, 255, 255, 0.96) 24px,
+      rgba(241, 110, 82, 0.04) 24px,
+      rgba(241, 110, 82, 0.04) 26px
+    );
+}
+
+.expenses-page li {
+  border-right: 5px solid rgba(91, 184, 200, 0.45);
+}
+
 @media screen and (max-width: 768px) {
   header {
-    padding: 20px 10px;
-  }
-
-  header h1 {
-    font-size: 2.2em;
-  }
-
-  header p {
-    font-size: 1em;
+    padding: 24px 12px 22px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
   }
 
   .top-nav {
-    flex-direction: column;
     gap: 8px;
+    margin: 12px 10px 24px;
   }
 
   .top-nav a {
-    padding: 10px 20px;
-    font-size: 1em;
+    width: calc(50% - 6px);
+    text-align: center;
+    padding: 10px 12px;
   }
 
-  .card, section {
-    width: 95%;
-    padding: 15px;
-    margin: 15px auto;
+  .card,
+  section {
+    width: 94%;
+    padding: 16px;
+    margin: 14px auto;
   }
 
   .tutorial-links {
@@ -320,37 +459,29 @@ li button {
 
   .input-row input[type="text"],
   .input-row input[type="number"],
-  .input-row input[type="date"] {
+  .input-row input[type="date"],
+  .input-row input[type="datetime-local"] {
     flex: 1;
     max-width: none;
   }
 
   button {
-    padding: 10px 20px;
-    font-size: 1em;
+    width: 100%;
+    padding: 10px 16px;
   }
 
   li {
-    font-size: 0.9em;
-    padding: 10px;
     max-width: none;
+    font-size: 0.95rem;
   }
 }
 
-/* Calendar styling */
-#calendar {
-  max-width: 100%;
-  margin: 0 auto;
-}
+@media screen and (max-width: 430px) {
+  .top-nav a {
+    width: 100%;
+  }
 
-.destination-item {
-  text-align: center;
-}
-.input-row input[type="date"] {
-  flex: 1 1 200px;  /* Grow to fit but not too small */
-  max-width: 200px;
-}
-
-.input-row button {
-  flex: 0 0 auto;
+  header h1 {
+    font-size: 2.1rem;
+  }
 }
