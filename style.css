@@ -98,6 +98,74 @@ header p {
   text-decoration: none;
 }
 
+.about-box {
+  background: linear-gradient(135deg, #fff8ef, #ffe4c7);
+}
+
+.about-box h2 {
+  text-align: center;
+  color: #8a4b08;
+  margin-bottom: 12px;
+}
+
+.about-box p {
+  text-align: center;
+  color: #6a4b2f;
+  line-height: 1.7;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.tutorial-box {
+  background: linear-gradient(135deg, #fff8ef, #ffe4c7);
+}
+
+.tutorial-box h2 {
+  text-align: center;
+  color: #8a4b08;
+  margin-bottom: 8px;
+}
+
+.tutorial-box p {
+  text-align: center;
+  color: #6a4b2f;
+  margin-bottom: 20px;
+}
+
+.tutorial-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.tutorial-link {
+  display: block;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 166, 77, 0.35);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+.tutorial-link strong {
+  display: block;
+  color: #c96c06;
+  font-size: 1.05em;
+  margin-bottom: 6px;
+}
+
+.tutorial-link span {
+  display: block;
+  color: #6a4b2f;
+  line-height: 1.5;
+}
+
+.tutorial-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+
 /* -----------------------------
    Inputs
 ----------------------------- */
@@ -241,6 +309,10 @@ li button {
     margin: 15px auto;
   }
 
+  .tutorial-links {
+    grid-template-columns: 1fr;
+  }
+
   .input-row {
     flex-direction: column;
     align-items: stretch;
@@ -273,7 +345,6 @@ li button {
 
 .destination-item {
   text-align: center;
-}
 }
 .input-row input[type="date"] {
   flex: 1 1 200px;  /* Grow to fit but not too small */
