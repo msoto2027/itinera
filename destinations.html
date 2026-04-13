@@ -3,41 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Itinera - Packing List</title>
+  <title>Itinera - Destinations</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <header>
-    <h1>Packing List</h1>
-    <p>Keep track of what to bring on your trip!</p>
+    <h1>Destinations</h1>
+    <p>Plan your trip destinations!</p>
   </header>
 
   <!-- Navigation below header -->
   <nav class="top-nav">
     <a href="index.html">Home</a>
     <a href="itinerary.html">Itinerary</a>
-    <a href="destinations.html">Destinations</a>
+    <a href="packing.html">Packing List</a>
     <a href="expenses.html">Expenses</a>
   </nav>
 
   <section class="card">
-    <h2>Add Item</h2>
+    <h2>Add Destination</h2>
 
-    <!-- Input and Add button -->
     <div class="input-row">
-      <input type="text" id="itemInput" placeholder="Packing item">
-      <button onclick="addItem()">Add</button>
+      <input type="text" id="destinationInput" placeholder="Destination name">
+      <button onclick="addDestination()">Add</button>
     </div>
 
-    <!-- Packing list -->
-    <ul id="packingList">
-      <!-- Items will appear here -->
+    <ul id="destinationList">
+      <!-- Destinations will appear here -->
     </ul>
   </section>
 
   <!-- Link external JavaScript -->
-  <script src="packing.js"></script>
+  <script src="destinations.js"></script>
 
 </body>
 </html>
