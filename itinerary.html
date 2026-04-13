@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Itinera - Itinerary</title>
   <link rel="stylesheet" href="style.css">
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 </head>
 <body>
 
   <header>
-    <h1>Itinerary ✈️</h1>
+    <h1>Itinerary</h1>
     <p>Plan your trip activities and dates!</p>
   </header>
 
@@ -24,13 +27,18 @@
 
     <div class="input-row">
       <input type="text" id="activityInput" placeholder="Activity name">
-      <input type="date" id="dateInput">
+      <input type="datetime-local" id="dateInput">
       <button onclick="addActivity()">Add</button>
     </div>
 
     <ol id="activityList">
       <!-- Activities will appear here -->
     </ol>
+  </section>
+
+  <section class="card">
+    <h2>Calendar View</h2>
+    <div id='calendar'></div>
   </section>
 
   <!-- Link the external JavaScript file -->
