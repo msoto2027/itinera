@@ -28,6 +28,7 @@
 
     <div class="input-row">
       <input type="text" id="activityInput" placeholder="Activity name">
+      <input type="text" id="activityAddressInput" placeholder="Address (optional)">
       <input type="datetime-local" id="dateInput">
       <button onclick="addActivity()">Add</button>
     </div>
@@ -56,6 +57,18 @@
     </div>
     <p id="tripRangeSourceText" class="trip-range-source">Using saved trip settings.</p>
     <div id='calendar'></div>
+  </section>
+
+  <section class="card">
+    <h2>View By Day</h2>
+    <div class="input-row day-view-controls">
+      <button type="button" id="dayViewPrevBtn">Previous Day</button>
+      <input type="date" id="dayViewDateInput" aria-label="Choose date to view activities">
+      <button type="button" id="dayViewTodayBtn">Today</button>
+      <button type="button" id="dayViewNextBtn">Next Day</button>
+    </div>
+    <p id="dayViewSummaryText" class="trip-range-source">Select a date to view scheduled activities.</p>
+    <ul id="dayViewList"></ul>
   </section>
 
   <script src="script.js"></script>

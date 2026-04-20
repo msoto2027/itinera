@@ -11,13 +11,16 @@ document.addEventListener('DOMContentLoaded', function() {
   loadActivities();
   syncTripSettingsFromDestination();
   initializeTripControls();
+  initializeDayViewControls();
   initializeCalendar();
   applyTripRangeToCalendar();
   updateTripRangeSourceText();
+  refreshDayView();
 });
 
 function addActivity() {
   const activityInput = document.getElementById("activityInput");
+  const activityAddressInput = document.getElementById("activityAddressInput");
   const dateInput = document.getElementById("dateInput");
 
   if (activityInput.value.trim() === "" || dateInput.value === "") {
@@ -31,7 +34,8 @@ function addActivity() {
   }
 
   const activity = {
-    title: activityInput.value,
+    title: activityInput.value.trim(),
+    address: activityAddressInput ? activityAddressInput.value.trim() : "",
     date: dateInput.value,
     id: Date.now() // unique id
   };
@@ -44,7 +48,7 @@ function addActivity() {
 
   // Add to calendar
   calendar.addEvent({
-    title: activity.title,
+    title: getCalendarEventTitle(activity),
     start: activity.date,
     id: activity.id,
     backgroundColor: '#3498db',
@@ -53,16 +57,29 @@ function addActivity() {
 
   // Clear inputs
   activityInput.value = "";
+  if (activityAddressInput) {
+    activityAddressInput.value = "";
+  }
   dateInput.value = "";
+  refreshDayView();
 }
 
 function addToList(activity) {
   const activityList = document.getElementById("activityList");
   const li = document.createElement("li");
   const dateStr = new Date(activity.date).toLocaleString();
-  li.innerHTML = `${activity.title} - <strong>${dateStr}</strong> 
+  const addressLine = activity.address ? `<br><span class="activity-address">Address: ${activity.address}</span>` : "";
+  li.innerHTML = `${activity.title} - <strong>${dateStr}</strong>${addressLine}
                   <button onclick="deleteActivity(${activity.id})">Delete</button>`;
   activityList.appendChild(li);
+}
+
+function getCalendarEventTitle(activity) {
+  if (activity.address) {
+    return `${activity.title} (${activity.address})`;
+  }
+
+  return activity.title;
 }
 
 function deleteActivity(id) {
@@ -76,6 +93,8 @@ function deleteActivity(id) {
   // Remove from calendar
   const event = calendar.getEventById(id);
   if (event) event.remove();
+
+  refreshDayView();
 }
 
 function loadActivities() {
@@ -379,6 +398,118 @@ function updateTripRangeSourceText() {
   sourceText.textContent = tripRangeSourceLabel;
 }
 
+function getActivityDateOnly(activityDateTime) {
+  return String(activityDateTime).split('T')[0];
+}
+
+function formatDayViewDateLabel(dateValue) {
+  if (!dateValue) {
+    return 'No date selected';
+  }
+
+  const parsed = new Date(`${dateValue}T00:00:00`);
+  if (Number.isNaN(parsed.getTime())) {
+    return dateValue;
+  }
+
+  return parsed.toLocaleDateString(undefined, {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  });
+}
+
+function renderDayView(selectedDate) {
+  const dayViewList = document.getElementById('dayViewList');
+  const summaryText = document.getElementById('dayViewSummaryText');
+
+  if (!dayViewList || !summaryText || !selectedDate) {
+    return;
+  }
+
+  dayViewList.innerHTML = '';
+
+  const dayActivities = activities
+    .filter((activity) => getActivityDateOnly(activity.date) === selectedDate)
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+  const dayLabel = formatDayViewDateLabel(selectedDate);
+
+  if (dayActivities.length === 0) {
+    summaryText.textContent = `No activities planned for ${dayLabel}.`;
+    return;
+  }
+
+  summaryText.textContent = `${dayActivities.length} activit${dayActivities.length === 1 ? 'y' : 'ies'} planned for ${dayLabel}.`;
+
+  dayActivities.forEach((activity) => {
+    const li = document.createElement('li');
+    li.className = 'day-view-item';
+
+    const timeLabel = new Date(activity.date).toLocaleTimeString([], {
+      hour: 'numeric',
+      minute: '2-digit'
+    });
+
+    const addressLine = activity.address ? `<span class="activity-address">Address: ${activity.address}</span>` : '';
+    li.innerHTML = `<div class="day-view-main"><strong>${timeLabel}</strong> - ${activity.title}</div>${addressLine}`;
+    dayViewList.appendChild(li);
+  });
+}
+
+function refreshDayView() {
+  const dayViewDateInput = document.getElementById('dayViewDateInput');
+  if (!dayViewDateInput || !dayViewDateInput.value) {
+    return;
+  }
+
+  renderDayView(dayViewDateInput.value);
+}
+
+function shiftDateByDays(dateValue, deltaDays) {
+  const parsed = new Date(`${dateValue}T00:00:00`);
+  if (Number.isNaN(parsed.getTime())) {
+    return getTodayInputDate();
+  }
+
+  parsed.setDate(parsed.getDate() + deltaDays);
+  return parsed.toISOString().slice(0, 10);
+}
+
+function initializeDayViewControls() {
+  const dayViewDateInput = document.getElementById('dayViewDateInput');
+  const dayViewTodayBtn = document.getElementById('dayViewTodayBtn');
+  const dayViewPrevBtn = document.getElementById('dayViewPrevBtn');
+  const dayViewNextBtn = document.getElementById('dayViewNextBtn');
+
+  if (!dayViewDateInput || !dayViewTodayBtn || !dayViewPrevBtn || !dayViewNextBtn) {
+    return;
+  }
+
+  const initialDate = tripSettings.startDate || getTodayInputDate();
+  dayViewDateInput.value = initialDate;
+
+  dayViewDateInput.addEventListener('change', () => {
+    renderDayView(dayViewDateInput.value);
+  });
+
+  dayViewTodayBtn.addEventListener('click', () => {
+    dayViewDateInput.value = getTodayInputDate();
+    renderDayView(dayViewDateInput.value);
+  });
+
+  dayViewPrevBtn.addEventListener('click', () => {
+    dayViewDateInput.value = shiftDateByDays(dayViewDateInput.value || getTodayInputDate(), -1);
+    renderDayView(dayViewDateInput.value);
+  });
+
+  dayViewNextBtn.addEventListener('click', () => {
+    dayViewDateInput.value = shiftDateByDays(dayViewDateInput.value || getTodayInputDate(), 1);
+    renderDayView(dayViewDateInput.value);
+  });
+}
+
 function isActivityWithinTripRange(activityDateTime) {
   const activityDate = new Date(activityDateTime);
   const start = new Date(`${tripSettings.startDate}T00:00:00`);
@@ -395,7 +526,7 @@ function initializeCalendar() {
     initialDate: tripSettings.startDate,
     height: 'auto',
     events: activities.map(a => ({
-      title: a.title,
+      title: getCalendarEventTitle(a),
       start: a.date,
       id: a.id,
       backgroundColor: '#3498db',
