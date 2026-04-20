@@ -885,6 +885,46 @@ body.dark-mode #expenseList li {
   color: #e9f7fb;
 }
 
+.traveler-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.traveler-check-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 2px solid rgba(91, 184, 200, 0.45);
+  background: rgba(255, 255, 255, 0.7);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-main);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.18s ease, border-color 0.18s ease;
+  white-space: nowrap;
+  width: auto;
+}
+
+.traveler-check-option:has(input:checked) {
+  background: linear-gradient(135deg, rgba(91, 184, 200, 0.22), rgba(91, 184, 200, 0.12));
+  border-color: var(--accent-blue);
+}
+
+.traveler-check-option input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  min-width: 15px;
+  margin: 0;
+  accent-color: var(--accent-blue);
+  cursor: pointer;
+}
+
 body.dark-mode .traveler-check-option {
   background: rgba(24, 40, 48, 0.9);
   border-color: rgba(102, 198, 216, 0.34);
