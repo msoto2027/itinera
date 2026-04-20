@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Itinera - Printable Trip Summary</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="print-summary-page">
+
+  <header>
+    <h1>Trip Summary</h1>
+    <p id="printGeneratedAt">Generated from your saved Itinera data.</p>
+  </header>
+
+  <section class="card print-actions-card print-only-hidden">
+    <h2>Print & Share</h2>
+    <div class="data-tools-actions">
+      <button id="printSummaryBtn" type="button">Print or Save as PDF</button>
+      <a href="index.html" class="print-summary-link">Back Home</a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Destinations</h2>
+    <ul id="printDestinationsList"></ul>
+  </section>
+
+  <section class="card">
+    <h2>Itinerary</h2>
+    <ul id="printItineraryList"></ul>
+  </section>
+
+  <section class="card">
+    <h2>Packing List</h2>
+    <ul id="printPackingList"></ul>
+  </section>
+
+  <section class="card">
+    <h2>Travel Group</h2>
+    <ul id="printTravelersList"></ul>
+  </section>
+
+  <section class="card">
+    <h2>Expenses</h2>
+    <ul id="printExpensesList"></ul>
+  </section>
+
+  <section class="card">
+    <h2>Expense Split Summary</h2>
+    <ul id="printSplitSummaryList"></ul>
+  </section>
+
+  <script src="print-summary.js"></script>
+</body>
+</html>

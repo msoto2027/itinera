@@ -147,9 +147,16 @@ function updateLastImportStatus() {
 }
 
 function setupDataTransferControls() {
+  const printSummaryButton = document.getElementById("openPrintSummaryBtn");
   const exportButton = document.getElementById("exportDataBtn");
   const importButton = document.getElementById("importDataBtn");
   const importInput = document.getElementById("importDataInput");
+
+  if (printSummaryButton) {
+    printSummaryButton.addEventListener("click", () => {
+      window.open("print-summary.html", "_blank");
+    });
+  }
 
   if (!exportButton || !importButton || !importInput) {
     return;

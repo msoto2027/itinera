@@ -191,6 +191,22 @@ section h2 {
   min-width: 190px;
 }
 
+.print-summary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 190px;
+  text-decoration: none;
+  color: #ffffff;
+  font-family: 'Baloo 2', cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent-main), var(--accent-deep));
+  box-shadow: var(--shadow-pop);
+}
+
 .data-import-status {
   margin-top: 14px;
   margin-bottom: 0;
@@ -474,6 +490,27 @@ li button {
 
 .home-page .tutorial-link:nth-child(4) {
   border-color: rgba(236, 160, 81, 0.45);
+}
+
+.print-summary-page {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0) 28%),
+    linear-gradient(160deg, #e6f5f3 0%, #fff9ed 56%, #ffd9cc 100%);
+}
+
+.print-summary-page .card {
+  page-break-inside: avoid;
+}
+
+.print-summary-item,
+.print-empty-item {
+  display: block;
+  text-align: left;
+}
+
+.print-empty-item {
+  justify-content: center;
+  text-align: center;
 }
 
 .destinations-page {
@@ -762,6 +799,10 @@ body.dark-mode .card a {
   color: #ffd8c6;
 }
 
+body.dark-mode .print-summary-link {
+  color: #ffffff;
+}
+
 body.dark-mode .packing-page .card h2,
 body.dark-mode .expenses-page .card h2,
 body.dark-mode #packingList li,
@@ -886,11 +927,48 @@ body.dark-mode .destinations-page,
 body.dark-mode .itinerary-page,
 body.dark-mode .packing-page,
 body.dark-mode .expenses-page,
+body.dark-mode .print-summary-page,
 body.dark-mode .home-page {
   background:
     radial-gradient(circle at 16% 18%, rgba(70, 110, 120, 0.35) 0%, rgba(70, 110, 120, 0) 30%),
     radial-gradient(circle at 90% 10%, rgba(120, 88, 75, 0.3) 0%, rgba(120, 88, 75, 0) 28%),
     linear-gradient(160deg, #101a20 0%, #16262c 50%, #1e2a31 100%);
+}
+
+@media print {
+  body {
+    background: #ffffff;
+    color: #1f2e33;
+  }
+
+  .theme-toggle,
+  .print-only-hidden {
+    display: none !important;
+  }
+
+  header {
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 10px;
+  }
+
+  .card,
+  section {
+    width: 100%;
+    max-width: none;
+    margin: 12px 0;
+    box-shadow: none;
+    border-color: #d6d6d6;
+    background: #ffffff;
+    break-inside: avoid;
+  }
+
+  li {
+    background: #ffffff;
+    border-color: #d6d6d6;
+    color: #1f2e33;
+    box-shadow: none;
+  }
 }
 
 @media screen and (max-width: 768px) {
