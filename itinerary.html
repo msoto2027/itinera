@@ -39,6 +39,19 @@
 
   <section class="card">
     <h2>Calendar View</h2>
+    <div class="trip-length-presets" aria-label="Quick trip length options">
+      <button type="button" class="trip-preset-btn" data-days="3">3 Days</button>
+      <button type="button" class="trip-preset-btn" data-days="7">7 Days</button>
+      <button type="button" class="trip-preset-btn" data-days="14">14 Days</button>
+      <button type="button" class="trip-preset-btn" data-days="30">30 Days</button>
+    </div>
+    <div class="input-row">
+      <input type="date" id="tripStartDateInput" aria-label="Trip start date">
+      <input type="number" id="tripLengthInput" min="1" max="365" placeholder="Trip length (days)" aria-label="Trip length in days">
+    </div>
+    <div class="trip-range-apply-wrap">
+      <button type="button" id="applyTripRangeBtn">Apply Trip Length</button>
+    </div>
     <div id='calendar'></div>
   </section>
 

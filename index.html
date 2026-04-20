@@ -52,6 +52,17 @@
     </div>
   </section>
 
+  <section class="card data-tools-box">
+    <h2>Backup & Restore</h2>
+    <p>Export your trip data to a file, then import it later on this or another device.</p>
+    <div class="data-tools-actions">
+      <button id="exportDataBtn" type="button">Export Trip Data</button>
+      <button id="importDataBtn" type="button">Import Trip Data</button>
+      <input id="importDataInput" type="file" accept="application/json" hidden>
+    </div>
+    <p id="lastImportStatus" class="data-import-status" aria-live="polite">No backup imported yet.</p>
+  </section>
+
   <script src="script.js"></script>
 </body>
 </html>
