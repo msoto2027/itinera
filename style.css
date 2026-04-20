@@ -518,6 +518,22 @@ li button {
   text-align: left;
 }
 
+.print-meta-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(247, 253, 255, 0.95));
+}
+
+.print-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 8px 20px;
+}
+
+.print-meta-grid p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+}
+
 .print-empty-item {
   justify-content: center;
   text-align: center;
@@ -1055,9 +1071,15 @@ body.dark-mode .home-page {
 }
 
 @media print {
+  @page {
+    margin: 0.55in;
+  }
+
+  html,
   body {
     background: #ffffff;
     color: #1f2e33;
+    font-size: 11pt;
   }
 
   .theme-toggle,
@@ -1066,20 +1088,41 @@ body.dark-mode .home-page {
   }
 
   header {
+    padding: 0 0 10px;
     box-shadow: none;
     border-radius: 0;
     margin-bottom: 10px;
+    color: #1f2e33;
+    background: #ffffff;
+    border-bottom: 2px solid #cfd8dc;
+  }
+
+  header h1 {
+    font-size: 22pt;
+    text-shadow: none;
+  }
+
+  header p {
+    color: #4a5d63;
   }
 
   .card,
   section {
     width: 100%;
     max-width: none;
-    margin: 12px 0;
+    margin: 10px 0;
+    padding: 12px 14px;
     box-shadow: none;
-    border-color: #d6d6d6;
+    border: 1px solid #d6d6d6;
     background: #ffffff;
     break-inside: avoid;
+  }
+
+  .print-summary-page .card h2 {
+    margin-bottom: 8px;
+    font-size: 14pt;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 4px;
   }
 
   li {
@@ -1087,6 +1130,43 @@ body.dark-mode .home-page {
     border-color: #d6d6d6;
     color: #1f2e33;
     box-shadow: none;
+    padding: 8px 10px;
+    margin: 6px 0;
+    border-radius: 8px;
+    gap: 6px;
+  }
+
+  .print-summary-item,
+  .print-empty-item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    font-size: 10.5pt;
+    line-height: 1.4;
+  }
+
+  .print-meta-card {
+    margin-top: 0;
+  }
+
+  .print-meta-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .print-summary-link,
+  button,
+  input,
+  select {
+    box-shadow: none !important;
+  }
+
+  ul,
+  ol {
+    margin: 0;
+  }
+
+  .print-empty-item {
+    padding: 10px;
+    border-style: dashed;
   }
 }
 

@@ -37,11 +37,16 @@ function setupPrintButton() {
 
 function renderGeneratedAt() {
   const generatedAt = document.getElementById("printGeneratedAt");
+  const preparedOn = document.getElementById("printPreparedOn");
   if (!generatedAt) {
     return;
   }
 
-  generatedAt.textContent = `Generated ${new Date().toLocaleString()}`;
+  const timestamp = new Date().toLocaleString();
+  generatedAt.textContent = `Generated ${timestamp}`;
+  if (preparedOn) {
+    preparedOn.textContent = timestamp;
+  }
 }
 
 function renderList(listId, items, emptyText, formatter) {
@@ -106,7 +111,11 @@ function renderPacking() {
     "printPackingList",
     packingItems,
     "No packing items saved.",
-    (item) => `${item.name || "Unnamed item"}`
+    (item) => {
+      const itemName = item.name || "Unnamed item";
+      const status = item.checked ? "Packed" : "Not packed";
+      return `<strong>${itemName}</strong><br>${status}`;
+    }
   );
 }
 
