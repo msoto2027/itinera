@@ -21,7 +21,8 @@ function addItem() {
 
   const item = {
     id: Date.now(),
-    name: itemInput.value.trim()
+    name: itemInput.value.trim(),
+    checked: false
   };
 
   packingItems.push(item);
@@ -36,8 +37,30 @@ function addItemToList(item) {
   const packingList = document.getElementById("packingList");
   const li = document.createElement("li");
   li.dataset.packingItemId = String(item.id);
-  li.innerHTML = `${item.name} <button type="button" onclick="deleteItem(${item.id})">Delete</button>`;
+  if (item.checked) {
+    li.classList.add("packing-checked");
+  }
+  li.innerHTML = `
+    <label class="packing-check-label">
+      <input type="checkbox" class="packing-checkbox" ${item.checked ? "checked" : ""} onchange="toggleItem(${item.id})">
+      <span class="packing-item-name">${item.name}</span>
+    </label>
+    <button type="button" onclick="deleteItem(${item.id})">Delete</button>
+  `;
   packingList.appendChild(li);
+}
+
+function toggleItem(id) {
+  const item = packingItems.find((i) => i.id === id);
+  if (!item) {
+    return;
+  }
+  item.checked = !item.checked;
+  saveItems();
+  const li = document.querySelector(`[data-packing-item-id="${id}"]`);
+  if (li) {
+    li.classList.toggle("packing-checked", item.checked);
+  }
 }
 
 function deleteItem(id) {
@@ -261,7 +284,8 @@ function addSuggestedItem(itemName) {
 
   const item = {
     id: Date.now() + Math.floor(Math.random() * 1000),
-    name: itemName
+    name: itemName,
+    checked: false
   };
 
   packingItems.push(item);
