@@ -673,8 +673,18 @@ li button {
     );
 }
 
+.expense-members-card,
+.expense-split-card {
+  border-style: dashed;
+}
+
 .expenses-page li {
   border-right: 5px solid rgba(91, 184, 200, 0.45);
+}
+
+.split-summary-item {
+  display: block;
+  text-align: left;
 }
 
 .packing-page .card h2,
@@ -757,6 +767,16 @@ body.dark-mode .expenses-page .card h2,
 body.dark-mode #packingList li,
 body.dark-mode #expenseList li {
   color: #e9f7fb;
+}
+
+body.dark-mode .traveler-check-option {
+  background: rgba(24, 40, 48, 0.9);
+  border-color: rgba(102, 198, 216, 0.34);
+  color: #e9f7fb;
+}
+
+body.dark-mode .expense-split-members {
+  color: #bfe4ec;
 }
 
 body.dark-mode #suggestionList li {

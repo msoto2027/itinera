@@ -21,6 +21,18 @@
     <a href="destinations.html">Destinations</a>
   </nav>
 
+  <section class="card expense-members-card">
+    <h2>Who Is Going?</h2>
+    <div class="input-row">
+      <input type="text" id="travelerNameInput" placeholder="Traveler name">
+      <button type="button" onclick="addTraveler()">Add Traveler</button>
+    </div>
+    <p id="travelerSummaryText">Add everyone going on the trip to split expenses fairly.</p>
+    <ul id="travelerList">
+      <!-- Travelers will appear here -->
+    </ul>
+  </section>
+
   <section class="card">
     <h2>Add Expense</h2>
 
@@ -28,15 +40,30 @@
     <div class="input-row">
       <input type="text" id="expenseName" placeholder="Expense Name">
       <input type="number" id="expenseAmount" placeholder="Amount" step="0.01">
-      <input type="text" id="expensePayer" placeholder="Payer">
+      <input type="text" id="expensePayer" placeholder="Payer" list="travelerOptions">
       <input type="date" id="expenseDueDate" placeholder="Due Date">
       <button onclick="addExpense()">Add</button>
+    </div>
+    <datalist id="travelerOptions"></datalist>
+    <div class="expense-split-select">
+      <p id="expenseSplitHelpText">Choose which travelers should share this expense.</p>
+      <div id="expenseTravelerChecks" class="traveler-checks">
+        <!-- Traveler split checkboxes appear here -->
+      </div>
     </div>
 
     <!-- Expense list -->
     <ol id="expenseList">
       <!-- Expenses will appear here -->
     </ol>
+  </section>
+
+  <section class="card expense-split-card">
+    <h2>Expense Split</h2>
+    <p id="splitSummaryText">Add travelers and expenses to see how costs are split.</p>
+    <ul id="splitSummaryList">
+      <!-- Split summary appears here -->
+    </ul>
   </section>
 
   <script src="script.js"></script>
