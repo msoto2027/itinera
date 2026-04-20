@@ -955,8 +955,15 @@ body.dark-mode .expense-split-members {
   color: #bfe4ec;
 }
 
+body.dark-mode #travelerSummaryText,
+body.dark-mode #splitSummaryText,
+body.dark-mode #expenseSplitHelpText {
+  color: #5f7b84;
+}
+
+body.dark-mode #suggestionSourceText,
 body.dark-mode #suggestionList li {
-  color: #e9f7fb;
+  color: #5f7b84;
 }
 
 body.dark-mode #expenseList li strong {
