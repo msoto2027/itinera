@@ -1076,3 +1076,75 @@ body.dark-mode .home-page {
     font-size: 2.1rem;
   }
 }
+
+/* ─── iPhone / iOS compatibility ─────────────────────────────── */
+
+/* Prevent iOS from inflating font sizes on orientation change */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Remove blue tap flash on interactive elements */
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Safe area padding so content clears the home bar at the bottom */
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Push header content below the notch */
+header {
+  padding-top: max(42px, calc(env(safe-area-inset-top) + 14px));
+}
+
+/* Keep the theme toggle button clear of the notch and left sensor housing */
+.theme-toggle {
+  top: max(14px, calc(env(safe-area-inset-top) + 4px));
+  left: max(14px, calc(env(safe-area-inset-left) + 4px));
+}
+
+/* Eliminate 300ms tap delay on all interactive elements */
+button,
+a,
+input,
+select,
+label,
+textarea {
+  touch-action: manipulation;
+}
+
+/* Remove iOS default styling on form controls */
+input,
+select,
+textarea {
+  -webkit-appearance: none;
+}
+
+/* Ensure all buttons meet the recommended 44px minimum touch target */
+button {
+  min-height: 44px;
+}
+
+/* Ensure nav links and the theme toggle also meet the 44px touch target */
+.top-nav a,
+.theme-toggle {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* On touch-only devices, disable hover transforms so they don't get stuck */
+@media (hover: none) {
+  .top-nav a:hover,
+  .theme-toggle:hover,
+  .card a:hover,
+  .tutorial-link:hover,
+  button:hover {
+    transform: none;
+    filter: none;
+    box-shadow: var(--shadow-pop);
+  }
+}
