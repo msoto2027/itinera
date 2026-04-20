@@ -259,7 +259,24 @@ input {
   background: #fffdf8;
 }
 
+select {
+  margin: 8px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 2px solid var(--line-soft);
+  font-size: 1rem;
+  font-family: 'Nunito', sans-serif;
+  color: var(--ink-main);
+  background: #fffdf8;
+}
+
 input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(91, 184, 200, 0.2);
+}
+
+select:focus {
   outline: none;
   border-color: var(--accent-blue);
   box-shadow: 0 0 0 3px rgba(91, 184, 200, 0.2);
@@ -371,7 +388,21 @@ li button {
 .trip-range-apply-wrap {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 14px;
+}
+
+.trip-range-apply-wrap select {
+  min-width: 250px;
+}
+
+.trip-range-source {
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  color: var(--ink-soft);
+  font-weight: 600;
 }
 
 #calendar {
@@ -491,6 +522,26 @@ li button {
     linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(247, 255, 244, 0.95));
 }
 
+.packing-suggestions-card {
+  border-style: dashed;
+  border-color: rgba(91, 184, 200, 0.45);
+}
+
+.suggestion-actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+#suggestionList li {
+  color: #2e4d56;
+}
+
+#suggestionList .suggestion-empty {
+  justify-content: center;
+  text-align: center;
+}
+
 .expenses-page {
   background:
     radial-gradient(circle at 14% 20%, rgba(255, 220, 199, 0.68) 0%, rgba(255, 220, 199, 0) 30%),
@@ -597,6 +648,10 @@ body.dark-mode #expenseList li {
   color: #e9f7fb;
 }
 
+body.dark-mode #suggestionList li {
+  color: #e9f7fb;
+}
+
 body.dark-mode #expenseList li strong {
   color: #ffd6c6;
 }
@@ -613,6 +668,7 @@ body.dark-mode .top-nav a {
 }
 
 body.dark-mode input,
+body.dark-mode select,
 body.dark-mode #calendar {
   background: #122028;
   color: var(--ink-main);
@@ -628,6 +684,11 @@ body.dark-mode #destinationMap {
 }
 
 body.dark-mode input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(102, 198, 216, 0.22);
+}
+
+body.dark-mode select:focus {
   border-color: var(--accent-blue);
   box-shadow: 0 0 0 3px rgba(102, 198, 216, 0.22);
 }
@@ -719,6 +780,11 @@ body.dark-mode .home-page {
   .trip-preset-btn {
     min-width: 0;
     width: calc(50% - 4px);
+  }
+
+  .trip-range-apply-wrap select,
+  .trip-range-apply-wrap button {
+    width: 100%;
   }
 
   .input-row input[type="text"],
