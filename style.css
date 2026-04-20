@@ -1026,7 +1026,17 @@ body.dark-mode .itinerary-page .fc .fc-col-header-cell {
 
 body.dark-mode .itinerary-page .fc .fc-col-header-cell-cushion,
 body.dark-mode .itinerary-page .fc .fc-daygrid-day-number {
-  color: #d9f0f6;
+  color: #5a2b19;
+}
+
+body.dark-mode .itinerary-page .fc .fc-col-header-cell-cushion,
+body.dark-mode .itinerary-page .fc .fc-col-header-cell-cushion:visited,
+body.dark-mode .itinerary-page .fc .fc-col-header-cell-cushion:hover,
+body.dark-mode .itinerary-page .fc .fc-daygrid-day-number,
+body.dark-mode .itinerary-page .fc .fc-daygrid-day-number:visited,
+body.dark-mode .itinerary-page .fc .fc-daygrid-day-number:hover {
+  color: #5a2b19;
+  opacity: 1;
 }
 
 body.dark-mode .itinerary-page .fc .fc-day-today {
