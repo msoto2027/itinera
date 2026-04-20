@@ -47,13 +47,7 @@ function addActivity() {
   addToList(activity);
 
   // Add to calendar
-  calendar.addEvent({
-    title: getCalendarEventTitle(activity),
-    start: activity.date,
-    id: activity.id,
-    backgroundColor: '#3498db',
-    borderColor: '#2980b9'
-  });
+  calendar.addEvent(createCalendarEventData(activity));
 
   // Clear inputs
   activityInput.value = "";
@@ -80,6 +74,76 @@ function getCalendarEventTitle(activity) {
   }
 
   return activity.title;
+}
+
+function createCalendarEventData(activity) {
+  return {
+    title: getCalendarEventTitle(activity),
+    start: activity.date,
+    id: activity.id,
+    backgroundColor: '#3498db',
+    borderColor: '#2980b9',
+    extendedProps: {
+      activityTitle: activity.title,
+      address: activity.address || ''
+    }
+  };
+}
+
+function formatActivityDateTime(dateValue) {
+  const parsed = new Date(dateValue);
+  if (Number.isNaN(parsed.getTime())) {
+    return 'Unknown date/time';
+  }
+
+  return parsed.toLocaleString(undefined, {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit'
+  });
+}
+
+function getCalendarTooltipMarkup(event) {
+  const activityTitle = event.extendedProps.activityTitle || event.title || 'Untitled activity';
+  const whenLabel = formatActivityDateTime(event.start);
+  const address = event.extendedProps.address ? event.extendedProps.address : 'Not provided';
+
+  return `
+    <div class="calendar-tooltip-title">${activityTitle}</div>
+    <div class="calendar-tooltip-line"><strong>When:</strong> ${whenLabel}</div>
+    <div class="calendar-tooltip-line"><strong>Address:</strong> ${address}</div>
+  `;
+}
+
+function positionCalendarTooltip(tooltip, pageX, pageY) {
+  const offsetX = 14;
+  const offsetY = 14;
+  tooltip.style.left = `${pageX + offsetX}px`;
+  tooltip.style.top = `${pageY + offsetY}px`;
+}
+
+function attachCalendarHoverTooltip(info) {
+  const tooltip = document.createElement('div');
+  tooltip.className = 'calendar-hover-tooltip';
+  tooltip.innerHTML = getCalendarTooltipMarkup(info.event);
+  document.body.appendChild(tooltip);
+
+  const handleMouseMove = (event) => {
+    positionCalendarTooltip(tooltip, event.pageX, event.pageY);
+  };
+
+  const handleMouseLeave = () => {
+    info.el.removeEventListener('mousemove', handleMouseMove);
+    info.el.removeEventListener('mouseleave', handleMouseLeave);
+    if (tooltip.parentElement) {
+      tooltip.parentElement.removeChild(tooltip);
+    }
+  };
+
+  info.el.addEventListener('mousemove', handleMouseMove);
+  info.el.addEventListener('mouseleave', handleMouseLeave);
 }
 
 function deleteActivity(id) {
@@ -525,13 +589,12 @@ function initializeCalendar() {
     initialView: 'dayGrid',
     initialDate: tripSettings.startDate,
     height: 'auto',
-    events: activities.map(a => ({
-      title: getCalendarEventTitle(a),
-      start: a.date,
-      id: a.id,
-      backgroundColor: '#3498db',
-      borderColor: '#2980b9'
-    }))
+    events: activities.map(createCalendarEventData),
+    eventDidMount: function(info) {
+      info.el.addEventListener('mouseenter', () => {
+        attachCalendarHoverTooltip(info);
+      });
+    }
   });
   calendar.render();
 }

@@ -558,6 +558,33 @@ li button {
   font-weight: 700;
 }
 
+.calendar-hover-tooltip {
+  position: absolute;
+  z-index: 2000;
+  max-width: 280px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(91, 184, 200, 0.5);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 10px 24px rgba(44, 88, 98, 0.22);
+  color: #2b5059;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+.calendar-tooltip-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #22505a;
+  margin-bottom: 4px;
+}
+
+.calendar-tooltip-line {
+  color: #325962;
+}
+
 .itinerary-page #activityList .activity-address {
   color: #3b6a74;
   font-size: 0.92rem;
@@ -803,6 +830,18 @@ body.dark-mode .itinerary-page .fc .fc-day-today {
 
 body.dark-mode .itinerary-page .fc .fc-daygrid-event {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .calendar-hover-tooltip {
+  border-color: rgba(102, 198, 216, 0.56);
+  background: rgba(19, 33, 41, 0.96);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  color: #e3f3f7;
+}
+
+body.dark-mode .calendar-tooltip-title,
+body.dark-mode .calendar-tooltip-line {
+  color: #e3f3f7;
 }
 
 body.dark-mode .itinerary-page #activityList .activity-address {
