@@ -820,6 +820,7 @@ body.dark-mode .packing-checkbox:checked {
 }
 
 .packing-page .card h2,
+.destinations-page .card h2,
 .expenses-page .card h2 {
   color: #244851;
 }
@@ -899,6 +900,7 @@ body.dark-mode .print-summary-link {
 }
 
 body.dark-mode .packing-page .card h2,
+body.dark-mode .destinations-page .card h2,
 body.dark-mode .expenses-page .card h2,
 body.dark-mode #packingList li,
 body.dark-mode #expenseList li {
