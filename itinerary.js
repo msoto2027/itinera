@@ -4,7 +4,7 @@ let activities = JSON.parse(localStorage.getItem('itineraryActivities')) || [];
 const TRIP_SETTINGS_KEY = 'itineraryTripSettings';
 const DESTINATIONS_KEY = 'itineraryDestinations';
 let tripSettings = getTripSettings();
-let tripRangeSourceLabel = 'Using saved trip settings.';
+let tripRangeSourceLabel = 'Select a destination, then click Use Destination Dates.';
 let calendar;
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -219,70 +219,35 @@ function getTripRange(startDate, lengthDays) {
 }
 
 function initializeTripControls() {
-  const startDateInput = document.getElementById('tripStartDateInput');
-  const lengthInput = document.getElementById('tripLengthInput');
-  const applyButton = document.getElementById('applyTripRangeBtn');
   const destinationSelect = document.getElementById('destinationSyncSelect');
   const syncButton = document.getElementById('syncDestinationDatesBtn');
-  const presetButtons = document.querySelectorAll('.trip-preset-btn');
+  const quickDestinationTitle = document.getElementById('quickDestinationTitle');
+  const quickDestinationWrap = document.getElementById('quickDestinationWrap');
+  const quickDestinationNameInput = document.getElementById('quickDestinationNameInput');
+  const quickDestinationStartInput = document.getElementById('quickDestinationStartInput');
+  const quickDestinationEndInput = document.getElementById('quickDestinationEndInput');
+  const quickAddDestinationBtn = document.getElementById('quickAddDestinationBtn');
 
-  if (!startDateInput || !lengthInput || !applyButton) {
+  if (!destinationSelect || !syncButton) {
     return;
   }
 
-  startDateInput.value = tripSettings.startDate;
-  lengthInput.value = String(tripSettings.lengthDays);
-  updatePresetSelection(presetButtons, tripSettings.lengthDays);
-  populateDestinationSyncSelect(destinationSelect);
-
-  function applyTripRangeFromInputs() {
-    const nextStartDate = startDateInput.value;
-    const nextLength = Number.parseInt(lengthInput.value, 10);
-
-    if (!nextStartDate || Number.isNaN(nextLength) || nextLength < 1 || nextLength > 365) {
-      alert('Please enter a valid trip start date and a trip length from 1 to 365 days.');
-      return;
-    }
-
-    tripSettings = {
-      startDate: nextStartDate,
-      lengthDays: nextLength
-    };
-
-    tripRangeSourceLabel = 'Using custom trip settings.';
-    saveTripSettings();
-    applyTripRangeToCalendar();
-    updatePresetSelection(presetButtons, nextLength);
-    updateTripRangeSourceText();
+  if (quickDestinationStartInput) {
+    quickDestinationStartInput.value = tripSettings.startDate;
+  }
+  if (quickDestinationEndInput) {
+    quickDestinationEndInput.value = getTripRange(tripSettings.startDate, tripSettings.lengthDays).end;
   }
 
-  applyButton.addEventListener('click', () => {
-    applyTripRangeFromInputs();
-  });
-
-  presetButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const days = Number.parseInt(button.dataset.days, 10);
-      if (Number.isNaN(days)) {
-        return;
-      }
-
-      if (!startDateInput.value) {
-        startDateInput.value = getTodayInputDate();
-      }
-
-      lengthInput.value = String(days);
-      applyTripRangeFromInputs();
-    });
-  });
+  populateDestinationSyncSelect(destinationSelect, quickDestinationWrap, quickDestinationTitle);
 
   if (syncButton) {
     syncButton.addEventListener('click', () => {
-      populateDestinationSyncSelect(destinationSelect);
+      populateDestinationSyncSelect(destinationSelect, quickDestinationWrap, quickDestinationTitle);
       const selectedDestinationId = destinationSelect ? destinationSelect.value : '';
       const syncedDestination = syncTripSettingsFromDestination(selectedDestinationId);
       if (!syncedDestination) {
-        alert('No destination dates were found to sync yet. Add a destination with dates first.');
+        alert('No destination dates found yet. Add a destination below, then try again.');
         return;
       }
 
@@ -290,22 +255,46 @@ function initializeTripControls() {
         destinationSelect.value = String(syncedDestination.id);
       }
 
-      startDateInput.value = tripSettings.startDate;
-      lengthInput.value = String(tripSettings.lengthDays);
-      updatePresetSelection(presetButtons, tripSettings.lengthDays);
       applyTripRangeToCalendar();
+      updateTripRangeSourceText();
+
+      if (quickDestinationStartInput) {
+        quickDestinationStartInput.value = tripSettings.startDate;
+      }
+      if (quickDestinationEndInput) {
+        quickDestinationEndInput.value = getTripRange(tripSettings.startDate, tripSettings.lengthDays).end;
+      }
+    });
+  }
+
+  if (quickAddDestinationBtn && quickDestinationNameInput && quickDestinationStartInput && quickDestinationEndInput) {
+    quickAddDestinationBtn.addEventListener('click', () => {
+      const name = quickDestinationNameInput.value.trim();
+      const startDate = quickDestinationStartInput.value;
+      const endDate = quickDestinationEndInput.value;
+
+      if (!name || !startDate || !endDate) {
+        alert('Please enter destination name, start date, and end date.');
+        return;
+      }
+
+      if (new Date(endDate) < new Date(startDate)) {
+        alert('End date must be on or after the start date.');
+        return;
+      }
+
+      const destination = saveDestination({ name, startDate, endDate });
+      quickDestinationNameInput.value = '';
+      populateDestinationSyncSelect(destinationSelect, quickDestinationWrap, quickDestinationTitle);
+
+      if (destinationSelect) {
+        destinationSelect.value = String(destination.id);
+      }
+
+      tripRangeSourceLabel = `Added destination: ${destination.name}`;
       updateTripRangeSourceText();
     });
   }
-}
-
-function updatePresetSelection(presetButtons, selectedLength) {
-  presetButtons.forEach((button) => {
-    const buttonLength = Number.parseInt(button.dataset.days, 10);
-    const isActive = buttonLength === selectedLength;
-    button.classList.toggle('active', isActive);
-    button.setAttribute('aria-pressed', String(isActive));
-  });
 }
 
 function applyTripRangeToCalendar() {
@@ -383,7 +372,7 @@ function getDestinationOptionLabel(destination) {
   return `${baseName} (${startLabel} to ${endLabel})`;
 }
 
-function populateDestinationSyncSelect(selectElement) {
+function populateDestinationSyncSelect(selectElement, quickDestinationWrap, quickDestinationTitle) {
   if (!selectElement) {
     return;
   }
@@ -395,10 +384,23 @@ function populateDestinationSyncSelect(selectElement) {
   if (destinations.length === 0) {
     const option = document.createElement('option');
     option.value = '';
-    option.textContent = 'No destinations available';
+    option.textContent = 'No destinations yet';
     selectElement.appendChild(option);
     selectElement.disabled = true;
+    if (quickDestinationWrap) {
+      quickDestinationWrap.classList.remove('hidden');
+    }
+    if (quickDestinationTitle) {
+      quickDestinationTitle.classList.remove('hidden');
+    }
     return;
+  }
+
+  if (quickDestinationWrap) {
+    quickDestinationWrap.classList.add('hidden');
+  }
+  if (quickDestinationTitle) {
+    quickDestinationTitle.classList.add('hidden');
   }
 
   destinations.forEach((destination) => {
@@ -414,6 +416,20 @@ function populateDestinationSyncSelect(selectElement) {
   }
 
   selectElement.disabled = destinations.length <= 1;
+}
+
+function saveDestination(destinationInput) {
+  const destinations = getDestinations();
+  const destination = {
+    id: Date.now(),
+    name: destinationInput.name,
+    startDate: destinationInput.startDate,
+    endDate: destinationInput.endDate
+  };
+
+  destinations.push(destination);
+  localStorage.setItem(DESTINATIONS_KEY, JSON.stringify(destinations));
+  return destination;
 }
 
 function getTripSettingsFromDestination(destination) {

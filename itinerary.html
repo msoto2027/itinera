@@ -42,22 +42,18 @@
 
   <section class="card">
     <h2>Calendar View</h2>
-    <div class="trip-length-presets" aria-label="Quick trip length options">
-      <button type="button" class="trip-preset-btn" data-days="3">3 Days</button>
-      <button type="button" class="trip-preset-btn" data-days="7">7 Days</button>
-      <button type="button" class="trip-preset-btn" data-days="14">14 Days</button>
-      <button type="button" class="trip-preset-btn" data-days="30">30 Days</button>
-    </div>
-    <div class="input-row">
-      <input type="date" id="tripStartDateInput" aria-label="Trip start date">
-      <input type="number" id="tripLengthInput" min="1" max="365" placeholder="Trip length (days)" aria-label="Trip length in days">
-      <button type="button" id="applyTripRangeBtn">Apply Trip Length</button>
-    </div>
     <div class="trip-range-apply-wrap">
       <select id="destinationSyncSelect" aria-label="Select destination to sync dates from"></select>
       <button type="button" id="syncDestinationDatesBtn">Use Destination Dates</button>
     </div>
-    <p id="tripRangeSourceText" class="trip-range-source">Using saved trip settings.</p>
+    <p class="quick-destination-title" id="quickDestinationTitle">No destinations yet? Add one here.</p>
+    <div class="input-row quick-destination-wrap" id="quickDestinationWrap">
+      <input type="text" id="quickDestinationNameInput" placeholder="Destination name" aria-label="Destination name">
+      <input type="date" id="quickDestinationStartInput" aria-label="Destination start date">
+      <input type="date" id="quickDestinationEndInput" aria-label="Destination end date">
+      <button type="button" id="quickAddDestinationBtn">Add Destination</button>
+    </div>
+    <p id="tripRangeSourceText" class="trip-range-source">Select a destination, then click Use Destination Dates.</p>
     <div id='calendar'></div>
   </section>
 

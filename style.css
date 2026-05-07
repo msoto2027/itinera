@@ -449,25 +449,6 @@ li button {
   width: auto;
 }
 
-.trip-length-presets {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
-.trip-preset-btn {
-  min-width: 84px;
-  padding: 8px 12px;
-  font-size: 0.9rem;
-}
-
-.trip-preset-btn.active {
-  background: linear-gradient(135deg, #4ca8ba, #3f8f9f);
-  box-shadow: 0 8px 16px rgba(74, 157, 171, 0.35);
-}
-
 .trip-range-apply-wrap {
   display: flex;
   justify-content: center;
@@ -501,8 +482,35 @@ li button {
   min-width: clamp(130px, 16vw, 210px);
 }
 
-.itinerary-page #applyTripRangeBtn {
-  min-width: clamp(170px, 18vw, 220px);
+.quick-destination-wrap {
+  margin-top: -2px;
+  margin-bottom: 8px;
+}
+
+.quick-destination-title {
+  margin: 2px 0 6px;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.quick-destination-wrap input[type="text"] {
+  flex: 1 1 220px;
+  max-width: 260px;
+}
+
+.quick-destination-wrap input[type="date"] {
+  flex: 1 1 160px;
+  max-width: 180px;
+}
+
+.quick-destination-wrap.hidden {
+  display: none;
+}
+
+.quick-destination-title.hidden {
+  display: none;
 }
 
 .trip-range-source {
@@ -1113,10 +1121,6 @@ body.dark-mode #calendar {
   border-color: rgba(86, 128, 139, 0.82);
 }
 
-body.dark-mode .trip-preset-btn.active {
-  background: linear-gradient(135deg, #58a9bc, #468fa1);
-}
-
 body.dark-mode #destinationMap {
   border-color: rgba(86, 128, 139, 0.82);
 }
@@ -1422,28 +1426,8 @@ body.dark-mode .home-page {
     border-radius: 10px;
   }
 
-  .trip-length-presets {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 6px;
-  }
-
-  .trip-length-presets .trip-preset-btn {
-    width: 100%;
-    min-width: 0;
-    min-height: 32px;
-    padding: 6px 6px;
-    font-size: 0.74rem;
-    border-radius: 9px;
-  }
-
   .trip-range-apply-wrap select,
   .trip-range-apply-wrap button {
-    width: 100%;
-  }
-
-  .itinerary-page #applyTripRangeBtn {
-    min-width: 0;
     width: 100%;
   }
 
@@ -1509,25 +1493,9 @@ body.dark-mode .home-page {
     right: 8px;
   }
 
-  .itinerary-page .trip-range-apply-wrap button,
-  .itinerary-page #applyTripRangeBtn {
+  .itinerary-page .trip-range-apply-wrap button {
     font-size: 0.88rem;
     padding: 7px 10px;
-  }
-
-  .trip-length-presets {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 4px;
-  }
-
-  .trip-length-presets .trip-preset-btn {
-    width: 100%;
-    min-width: 0;
-    min-height: 28px;
-    padding: 4px 4px;
-    font-size: 0.66rem;
-    border-radius: 7px;
   }
 
   button:not(.theme-toggle) {
@@ -1599,6 +1567,7 @@ textarea {
 input,
 select,
 textarea {
+  appearance: none;
   -webkit-appearance: none;
 }
 
