@@ -1238,6 +1238,12 @@ body.dark-mode #calendar {
   border-color: rgba(86, 128, 139, 0.82);
 }
 
+body.dark-mode .top-nav-dropdown select {
+  background: linear-gradient(135deg, var(--accent-main), #ffaf73);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.68);
+}
+
 body.dark-mode #destinationMap {
   border-color: rgba(86, 128, 139, 0.82);
 }
