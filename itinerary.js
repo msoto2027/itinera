@@ -3,8 +3,9 @@
 let activities = JSON.parse(localStorage.getItem('itineraryActivities')) || [];
 const TRIP_SETTINGS_KEY = 'itineraryTripSettings';
 const DESTINATIONS_KEY = 'itineraryDestinations';
+const DEFAULT_TRIP_RANGE_LABEL = 'Select a destination, then click Use Destination Dates.';
 let tripSettings = getTripSettings();
-let tripRangeSourceLabel = 'Select a destination, then click Use Destination Dates.';
+let tripRangeSourceLabel = DEFAULT_TRIP_RANGE_LABEL;
 let calendar;
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -472,6 +473,11 @@ function syncTripSettingsFromDestination(selectedDestinationId) {
 function updateTripRangeSourceText() {
   const sourceText = document.getElementById('tripRangeSourceText');
   if (!sourceText) {
+    return;
+  }
+
+  if (tripRangeSourceLabel === DEFAULT_TRIP_RANGE_LABEL) {
+    sourceText.innerHTML = '<strong>Select a destination</strong>, <strong>then click Use Destination Dates</strong>.';
     return;
   }
 

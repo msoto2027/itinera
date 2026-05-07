@@ -559,7 +559,7 @@ li button {
   text-align: center;
   color: var(--ink-soft);
   font-size: 0.92rem;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .quick-destination-wrap input[type="text"] {
@@ -585,7 +585,11 @@ li button {
   margin-bottom: 10px;
   text-align: center;
   color: var(--ink-soft);
-  font-weight: 600;
+  font-weight: 400;
+}
+
+.trip-range-source strong {
+  font-weight: 700;
 }
 
 #calendar {
