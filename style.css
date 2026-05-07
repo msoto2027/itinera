@@ -1416,9 +1416,25 @@ body.dark-mode .home-page {
     width: 100%;
   }
 
-  .trip-preset-btn {
+  button:not(.theme-toggle) {
+    font-size: 0.94rem;
+    padding: 9px 13px;
+    border-radius: 10px;
+  }
+
+  .trip-length-presets {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .trip-length-presets .trip-preset-btn {
+    width: 100%;
     min-width: 0;
-    width: calc(50% - 4px);
+    min-height: 32px;
+    padding: 6px 6px;
+    font-size: 0.74rem;
+    border-radius: 9px;
   }
 
   .trip-range-apply-wrap select,
@@ -1439,7 +1455,7 @@ body.dark-mode .home-page {
 
   button:not(.theme-toggle):not(li button):not(.input-row button) {
     width: 100%;
-    padding: 10px 16px;
+    padding: 8px 12px;
   }
 
   .input-row {
@@ -1460,6 +1476,12 @@ body.dark-mode .home-page {
   .input-row button {
     width: auto;
     flex-shrink: 0;
+    padding: 8px 12px;
+  }
+
+  li button {
+    padding: 5px 10px;
+    font-size: 0.78rem;
   }
 
   li {
@@ -1489,8 +1511,34 @@ body.dark-mode .home-page {
 
   .itinerary-page .trip-range-apply-wrap button,
   .itinerary-page #applyTripRangeBtn {
-    font-size: 0.94rem;
-    padding: 9px 12px;
+    font-size: 0.88rem;
+    padding: 7px 10px;
+  }
+
+  .trip-length-presets {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .trip-length-presets .trip-preset-btn {
+    width: 100%;
+    min-width: 0;
+    min-height: 28px;
+    padding: 4px 4px;
+    font-size: 0.66rem;
+    border-radius: 7px;
+  }
+
+  button:not(.theme-toggle) {
+    font-size: 0.88rem;
+    padding: 8px 10px;
+    border-radius: 9px;
+  }
+
+  li button {
+    font-size: 0.74rem;
+    padding: 4px 8px;
   }
 
   .brand-mark {
