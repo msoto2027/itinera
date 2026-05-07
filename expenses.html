@@ -39,6 +39,15 @@
   <section class="card">
     <h2>Add Expense</h2>
 
+    <div class="expense-import-tools">
+      <p id="itineraryImportHelpText">Select a saved itinerary activity to copy its title and address into a new expense.</p>
+      <div class="trip-range-apply-wrap expense-import-row">
+        <select id="itineraryExpenseSelect" aria-label="Select itinerary activity to import into expense"></select>
+        <button type="button" id="importItineraryExpenseBtn">Use Itinerary Item</button>
+      </div>
+      <p id="itineraryImportStatus" class="data-import-status"></p>
+    </div>
+
     <!-- Inputs and Add button -->
     <div class="input-row">
       <input type="text" id="expenseName" placeholder="Expense Name">

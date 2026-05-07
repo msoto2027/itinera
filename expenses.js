@@ -2,17 +2,128 @@
 
 const EXPENSES_KEY = "itineraryExpenses";
 const TRAVELERS_KEY = "itineraryTravelers";
+const ACTIVITIES_KEY = "itineraryActivities";
 let expenses = JSON.parse(localStorage.getItem(EXPENSES_KEY)) || [];
 let travelers = JSON.parse(localStorage.getItem(TRAVELERS_KEY)) || [];
+let itineraryActivities = getStoredActivities();
 
 document.addEventListener("DOMContentLoaded", () => {
   loadTravelers();
   loadExpenses();
   refreshTravelerOptions();
   renderExpenseTravelerChecks();
+  initializeItineraryExpenseImport();
   updateTravelerSummary();
   updateSplitSummary();
 });
+
+function getStoredActivities() {
+  try {
+    const storedActivities = JSON.parse(localStorage.getItem(ACTIVITIES_KEY)) || [];
+    return Array.isArray(storedActivities) ? storedActivities : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function initializeItineraryExpenseImport() {
+  const itinerarySelect = document.getElementById("itineraryExpenseSelect");
+  const importButton = document.getElementById("importItineraryExpenseBtn");
+
+  if (!itinerarySelect || !importButton) {
+    return;
+  }
+
+  populateItineraryExpenseOptions(itinerarySelect);
+  importButton.addEventListener("click", importSelectedItineraryActivity);
+}
+
+function populateItineraryExpenseOptions(selectElement) {
+  const helpText = document.getElementById("itineraryImportHelpText");
+  const importButton = document.getElementById("importItineraryExpenseBtn");
+  if (!selectElement || !helpText || !importButton) {
+    return;
+  }
+
+  itineraryActivities = getStoredActivities()
+    .slice()
+    .sort((left, right) => new Date(left.date) - new Date(right.date));
+
+  selectElement.innerHTML = "";
+
+  if (itineraryActivities.length === 0) {
+    const emptyOption = document.createElement("option");
+    emptyOption.value = "";
+    emptyOption.textContent = "No itinerary items available yet";
+    selectElement.appendChild(emptyOption);
+    selectElement.disabled = true;
+    importButton.disabled = true;
+    helpText.textContent = "Add activities on the itinerary page, then import one here to start a matching expense.";
+    setItineraryImportStatus("");
+    return;
+  }
+
+  const placeholderOption = document.createElement("option");
+  placeholderOption.value = "";
+  placeholderOption.textContent = "Choose an itinerary item";
+  selectElement.appendChild(placeholderOption);
+
+  itineraryActivities.forEach((activity) => {
+    const option = document.createElement("option");
+    option.value = String(activity.id);
+    option.textContent = getItineraryOptionLabel(activity);
+    selectElement.appendChild(option);
+  });
+
+  selectElement.disabled = false;
+  importButton.disabled = false;
+  helpText.textContent = "Select a saved itinerary activity to copy its title and address into a new expense.";
+  setItineraryImportStatus("");
+}
+
+function getItineraryOptionLabel(activity) {
+  const title = activity && activity.title ? activity.title : "Untitled activity";
+  const address = activity && activity.address ? activity.address.trim() : "";
+  return address ? `${title} - ${address}` : title;
+}
+
+function importSelectedItineraryActivity() {
+  const itinerarySelect = document.getElementById("itineraryExpenseSelect");
+  const expenseName = document.getElementById("expenseName");
+  if (!itinerarySelect || !expenseName) {
+    return;
+  }
+
+  itineraryActivities = getStoredActivities();
+  const selectedActivity = itineraryActivities.find((activity) => String(activity.id) === itinerarySelect.value);
+
+  if (!selectedActivity) {
+    setItineraryImportStatus("Choose an itinerary item to import first.");
+    return;
+  }
+
+  expenseName.value = buildImportedExpenseName(selectedActivity);
+  setItineraryImportStatus(getItineraryImportMessage(selectedActivity));
+}
+
+function buildImportedExpenseName(activity) {
+  const title = activity.title ? activity.title.trim() : "";
+  const address = activity.address ? activity.address.trim() : "";
+  return address ? `${title} - ${address}` : title;
+}
+
+function getItineraryImportMessage(activity) {
+  return `Loaded \"${activity.title}\" into the expense form.`;
+}
+
+function setItineraryImportStatus(message) {
+  const status = document.getElementById("itineraryImportStatus");
+  if (!status) {
+    return;
+  }
+
+  status.textContent = message;
+}
 
 // Function to add an expense
 function addExpense() {
@@ -55,6 +166,7 @@ function addExpense() {
   expenseDueDate.value = "";
   expensePayer.value = "";
   selectAllExpenseTravelers();
+  setItineraryImportStatus("");
 }
 
 function addTraveler() {

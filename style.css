@@ -318,6 +318,29 @@ section h2 {
   color: var(--ink-soft);
 }
 
+.expense-import-tools {
+  margin-bottom: 16px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px dashed rgba(91, 184, 200, 0.45);
+  background: linear-gradient(180deg, rgba(246, 253, 255, 0.92), rgba(255, 251, 240, 0.96));
+}
+
+.expense-import-tools p {
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.expense-import-row {
+  margin-bottom: 0;
+}
+
+.expense-import-row select {
+  width: 100%;
+  min-width: 250px;
+}
+
 .about-box h2,
 .tutorial-box h2,
 .about-box p,
