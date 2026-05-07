@@ -192,22 +192,38 @@ function setupResponsiveNavDropdown() {
   const select = document.createElement('select');
   select.setAttribute('aria-label', 'Navigate to page section');
 
+  const placeholderOption = document.createElement('option');
+  placeholderOption.value = '';
+  placeholderOption.textContent = 'Navigate to...';
+  placeholderOption.selected = true;
+  select.appendChild(placeholderOption);
+
+  const hasHomeLink = links.some((link) => {
+    const href = link.getAttribute('href') || '';
+    const targetUrl = new URL(href, window.location.href);
+    return targetUrl.pathname.endsWith('/index.html');
+  });
+
+  if (!hasHomeLink) {
+    const homeOption = document.createElement('option');
+    homeOption.value = new URL('index.html', window.location.href).href;
+    homeOption.textContent = 'Home';
+    select.appendChild(homeOption);
+  }
+
   links.forEach((link) => {
     const option = document.createElement('option');
-    option.value = link.getAttribute('href') || '';
+    const href = link.getAttribute('href') || '';
+    const targetUrl = new URL(href, window.location.href);
+    option.value = targetUrl.href;
     option.textContent = link.textContent ? link.textContent.trim() : 'Page';
-
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    if (option.value === currentPage) {
-      option.selected = true;
-    }
 
     select.appendChild(option);
   });
 
   select.addEventListener('change', () => {
     if (select.value) {
-      window.location.href = select.value;
+      window.location.assign(select.value);
     }
   });
 
