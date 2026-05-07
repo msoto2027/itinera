@@ -100,6 +100,53 @@ header p {
   box-shadow: 0 6px 14px rgba(241, 110, 82, 0.3);
 }
 
+.top-nav-dropdown {
+  display: none;
+  width: min(94%, 430px);
+  margin: 12px auto 24px;
+  position: relative;
+}
+
+.top-nav-dropdown select {
+  width: 100%;
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Baloo 2', cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  background: linear-gradient(135deg, var(--accent-main), #ffaf73);
+  border: 2px solid rgba(255, 255, 255, 0.68);
+  border-radius: 999px;
+  padding: 10px 36px 10px 18px;
+  box-shadow: 0 6px 14px rgba(241, 110, 82, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.top-nav-dropdown::before {
+  content: '▾';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1rem;
+  pointer-events: none;
+  transition: transform 0.2s ease;
+}
+
+.top-nav-dropdown:hover select,
+.top-nav-dropdown:focus-within select {
+  transform: translateY(-2px);
+  filter: saturate(1.08);
+  box-shadow: 0 10px 18px rgba(241, 110, 82, 0.34);
+}
+
+.top-nav-dropdown:hover::before,
+.top-nav-dropdown:focus-within::before {
+  transform: translateY(-46%);
+}
+
 .theme-toggle {
   position: fixed;
   top: 12px;
@@ -475,6 +522,26 @@ li button {
   width: 100%;
   min-width: 0;
   max-width: none;
+}
+
+.itinerary-page .trip-range-apply-wrap .select-with-arrow {
+  position: relative;
+  width: 100%;
+}
+
+.itinerary-page .trip-range-apply-wrap .select-with-arrow::after {
+  content: '▾';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+.itinerary-page .trip-range-apply-wrap .select-with-arrow select {
+  padding-right: 34px;
 }
 
 .itinerary-page .trip-range-apply-wrap button {
@@ -1286,6 +1353,10 @@ body.dark-mode .conversion-result {
   color: #bfe4ec;
 }
 
+body.dark-mode .itinerary-page .trip-range-apply-wrap .select-with-arrow::after {
+  color: #d8edf3;
+}
+
 body.dark-mode .rates-table {
   background: rgba(22, 35, 42, 0.94);
   border-color: rgba(86, 128, 139, 0.64);
@@ -1438,6 +1509,14 @@ body.dark-mode .home-page {
 }
 
 @media screen and (max-width: 768px) {
+  .top-nav {
+    display: none;
+  }
+
+  .top-nav-dropdown {
+    display: block;
+  }
+
   body::before {
     height: calc(env(safe-area-inset-top) + 58px);
     border-radius: 0 0 16px 16px;
@@ -1447,17 +1526,6 @@ body.dark-mode .home-page {
     padding: 58px 12px 22px;
     border-bottom-left-radius: 24px;
     border-bottom-right-radius: 24px;
-  }
-
-  .top-nav {
-    gap: 8px;
-    margin: 12px 10px 24px;
-  }
-
-  .top-nav a {
-    width: calc(50% - 6px);
-    text-align: center;
-    padding: 10px 12px;
   }
 
   .theme-toggle {
@@ -1558,10 +1626,6 @@ body.dark-mode .home-page {
   body::before {
     height: calc(env(safe-area-inset-top) + 54px);
     border-radius: 0 0 14px 14px;
-  }
-
-  .top-nav a {
-    width: 100%;
   }
 
   .theme-toggle {

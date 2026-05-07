@@ -175,8 +175,49 @@ function setupDataTransferControls() {
   });
 }
 
+function setupResponsiveNavDropdown() {
+  const nav = document.querySelector('.top-nav');
+  if (!nav || document.querySelector('.top-nav-dropdown')) {
+    return;
+  }
+
+  const links = Array.from(nav.querySelectorAll('a[href]'));
+  if (!links.length) {
+    return;
+  }
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'top-nav-dropdown';
+
+  const select = document.createElement('select');
+  select.setAttribute('aria-label', 'Navigate to page section');
+
+  links.forEach((link) => {
+    const option = document.createElement('option');
+    option.value = link.getAttribute('href') || '';
+    option.textContent = link.textContent ? link.textContent.trim() : 'Page';
+
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    if (option.value === currentPage) {
+      option.selected = true;
+    }
+
+    select.appendChild(option);
+  });
+
+  select.addEventListener('change', () => {
+    if (select.value) {
+      window.location.href = select.value;
+    }
+  });
+
+  wrapper.appendChild(select);
+  nav.insertAdjacentElement('afterend', wrapper);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   addThemeToggle();
+  setupResponsiveNavDropdown();
   applyTheme(getInitialTheme());
   setupDataTransferControls();
   updateLastImportStatus();

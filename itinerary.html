@@ -43,8 +43,11 @@
 
   <section class="card">
     <h2>Calendar View</h2>
+    <p id="tripRangeSourceText" class="trip-range-source">Select a destination, then click Use Destination Dates.</p>
     <div class="trip-range-apply-wrap">
-      <select id="destinationSyncSelect" aria-label="Select destination to sync dates from"></select>
+      <div class="select-with-arrow">
+        <select id="destinationSyncSelect" aria-label="Select destination to sync dates from"></select>
+      </div>
       <button type="button" id="syncDestinationDatesBtn">Use Destination Dates</button>
     </div>
     <p class="quick-destination-title" id="quickDestinationTitle">No destinations yet? Add one here.</p>
@@ -54,7 +57,6 @@
       <input type="date" id="quickDestinationEndInput" aria-label="Destination end date">
       <button type="button" id="quickAddDestinationBtn">Add Destination</button>
     </div>
-    <p id="tripRangeSourceText" class="trip-range-source">Select a destination, then click Use Destination Dates.</p>
     <div id='calendar'></div>
   </section>
 
