@@ -568,6 +568,56 @@ li button {
   text-align: center;
 }
 
+.conversion-page {
+  background:
+    radial-gradient(circle at 12% 14%, rgba(194, 234, 239, 0.64) 0%, rgba(194, 234, 239, 0) 28%),
+    radial-gradient(circle at 88% 10%, rgba(255, 222, 204, 0.62) 0%, rgba(255, 222, 204, 0) 26%),
+    linear-gradient(160deg, #dff4f4 0%, #fff9ed 52%, #ffddcf 100%);
+}
+
+.conversion-controls {
+  margin-bottom: 10px;
+}
+
+.conversion-result {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  text-align: center;
+  color: #24505a;
+  font-weight: 700;
+  font-size: 1.04rem;
+}
+
+.rates-table-wrap {
+  overflow-x: auto;
+}
+
+.rates-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid rgba(91, 184, 200, 0.32);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.rates-table th,
+.rates-table td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(91, 184, 200, 0.2);
+}
+
+.rates-table th {
+  font-family: 'Baloo 2', cursive;
+  color: #27535d;
+  background: rgba(91, 184, 200, 0.16);
+}
+
+.rates-table tr:last-child td {
+  border-bottom: none;
+}
+
 /* Page-specific moods while keeping one palette */
 .home-page {
   background:
@@ -1223,6 +1273,32 @@ body.dark-mode .calendar-tooltip-line {
 
 body.dark-mode .itinerary-page #activityList .activity-address {
   color: #bfe4ec;
+}
+
+body.dark-mode .conversion-page {
+  background:
+    radial-gradient(circle at 16% 16%, rgba(52, 92, 103, 0.34) 0%, rgba(52, 92, 103, 0) 32%),
+    radial-gradient(circle at 86% 10%, rgba(105, 79, 69, 0.28) 0%, rgba(105, 79, 69, 0) 28%),
+    linear-gradient(160deg, #121d24 0%, #17272e 52%, #1f2d35 100%);
+}
+
+body.dark-mode .conversion-result {
+  color: #bfe4ec;
+}
+
+body.dark-mode .rates-table {
+  background: rgba(22, 35, 42, 0.94);
+  border-color: rgba(86, 128, 139, 0.64);
+}
+
+body.dark-mode .rates-table th,
+body.dark-mode .rates-table td {
+  color: #e5f4f8;
+  border-bottom-color: rgba(86, 128, 139, 0.42);
+}
+
+body.dark-mode .rates-table th {
+  background: rgba(51, 91, 102, 0.36);
 }
 
 body.dark-mode .day-view-main {

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Itinera - Currency Rates</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="conversion-page">
+
+  <a class="brand-mark" href="index.html" aria-label="Go to Itinera home page">Itinera</a>
+
+  <header>
+    <h1>Currency Rates</h1>
+    <p>Check live exchange rates and convert trip costs quickly.</p>
+  </header>
+
+  <nav class="top-nav">
+    <a href="index.html">Home</a>
+    <a href="destinations.html">Destinations</a>
+    <a href="itinerary.html">Itinerary</a>
+    <a href="packing.html">Packing List</a>
+    <a href="expenses.html">Expenses</a>
+  </nav>
+
+  <section class="card">
+    <h2>Quick Converter</h2>
+    <div class="input-row conversion-controls">
+      <input type="number" id="conversionAmount" min="0" step="0.01" value="1" placeholder="Amount" aria-label="Amount to convert">
+      <select id="fromCurrency" aria-label="Currency to convert from"></select>
+      <select id="toCurrency" aria-label="Currency to convert to"></select>
+      <button type="button" id="convertCurrencyBtn">Convert</button>
+    </div>
+    <p id="conversionResult" class="conversion-result">Enter an amount and choose currencies.</p>
+    <p id="conversionUpdatedAt" class="trip-range-source">Rates update from online market data.</p>
+  </section>
+
+  <section class="card">
+    <h2>Rate Snapshot</h2>
+    <div class="input-row conversion-controls">
+      <select id="ratesBaseCurrency" aria-label="Base currency for quick rates"></select>
+      <button type="button" id="refreshRatesBtn">Refresh Rates</button>
+    </div>
+    <div class="rates-table-wrap">
+      <table class="rates-table" aria-label="Top currency exchange rates">
+        <thead>
+          <tr>
+            <th>Currency</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody id="ratesTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+  <script src="conversion.js"></script>
+</body>
+</html>
