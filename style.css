@@ -785,6 +785,7 @@ li button {
 .itinerary-page .fc .fc-toolbar-title {
   font-size: clamp(1.25rem, 2.2vw, 1.65rem);
   letter-spacing: 0.4px;
+  color: var(--accent-deep);
 }
 
 .itinerary-page .fc .fc-daygrid-day-frame {
@@ -813,7 +814,7 @@ li button {
 }
 
 .itinerary-page .fc .fc-col-header-cell-cushion {
-  color: #2d5660;
+  color: #9b5443;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.6px;
@@ -821,7 +822,7 @@ li button {
 }
 
 .itinerary-page .fc .fc-daygrid-day-number {
-  color: #2f5862;
+  color: #9b5443;
   font-weight: 700;
   font-size: 0.9rem;
   padding: 5px 7px;
@@ -833,7 +834,7 @@ li button {
 .itinerary-page .fc .fc-daygrid-day-number,
 .itinerary-page .fc .fc-daygrid-day-number:visited,
 .itinerary-page .fc .fc-daygrid-day-number:hover {
-  color: #2f5862;
+  color: #9b5443;
   opacity: 1;
   text-decoration: none;
 }
@@ -1242,6 +1243,21 @@ body.dark-mode #calendar {
   border-color: rgba(86, 128, 139, 0.82);
 }
 
+body.dark-mode .itinerary-page #calendar {
+  background: linear-gradient(180deg, rgba(14, 22, 27, 0.98), rgba(19, 30, 36, 0.97));
+  border-color: rgba(146, 94, 80, 0.46);
+  box-shadow: inset 0 0 0 1px rgba(255, 222, 210, 0.06);
+}
+
+body.dark-mode .itinerary-page .fc-theme-standard .fc-scrollgrid,
+body.dark-mode .itinerary-page .fc-theme-standard .fc-scrollgrid-section > * {
+  background: rgba(17, 27, 33, 0.96);
+}
+
+body.dark-mode .itinerary-page .fc .fc-daygrid-day-frame {
+  background: rgba(20, 32, 38, 0.94);
+}
+
 body.dark-mode .top-nav-dropdown select {
   background: linear-gradient(135deg, var(--accent-main), #ffaf73);
   color: #ffffff;
@@ -1265,16 +1281,17 @@ body.dark-mode select:focus {
 body.dark-mode .fc .fc-toolbar-title,
 body.dark-mode .fc .fc-col-header-cell-cushion,
 body.dark-mode .fc .fc-daygrid-day-number {
-  color: #7fd8ee;
+  color: #5fa6bb;
 }
 
 body.dark-mode .fc-theme-standard td,
 body.dark-mode .fc-theme-standard th {
-  border-color: rgba(74, 110, 120, 0.65);
+  border-color: rgba(146, 94, 80, 0.72);
 }
 
 body.dark-mode .itinerary-page .fc .fc-col-header-cell {
-  background: rgba(102, 198, 216, 0.12);
+  background: linear-gradient(180deg, rgba(45, 61, 69, 0.98), rgba(29, 40, 47, 0.99));
+  box-shadow: inset 0 -1px 0 rgba(222, 240, 245, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 body.dark-mode .itinerary-page .fc a,
@@ -1282,7 +1299,7 @@ body.dark-mode .itinerary-page .fc a:visited,
 body.dark-mode .itinerary-page .fc a:hover,
 body.dark-mode .itinerary-page .fc a:focus {
   background: transparent;
-  color: #7fd8ee;
+  color: #5fa6bb;
   opacity: 1;
   text-decoration: none;
 }
@@ -1296,7 +1313,8 @@ body.dark-mode .itinerary-page .fc .fc-daygrid-event a:focus {
 
 body.dark-mode .itinerary-page .fc .fc-col-header-cell-cushion,
 body.dark-mode .itinerary-page .fc .fc-daygrid-day-number {
-  color: #7fd8ee;
+  color: #5a9fb3;
+  text-shadow: 0 1px 2px rgba(8, 20, 26, 0.42);
 }
 
 body.dark-mode .itinerary-page .fc .fc-col-header-cell-cushion,
@@ -1309,7 +1327,7 @@ body.dark-mode .itinerary-page .fc .fc-daygrid-day-number:visited,
 body.dark-mode .itinerary-page .fc .fc-daygrid-day-number:hover,
 body.dark-mode .itinerary-page .fc .fc-daygrid-day-number:focus,
 body.dark-mode .itinerary-page .fc .fc-daygrid-day-number:active {
-  color: #7fd8ee !important;
+  color: #5a9fb3 !important;
   background: transparent !important;
   opacity: 1;
   text-decoration: none;
@@ -1319,12 +1337,12 @@ body.dark-mode .itinerary-page .fc .fc-daygrid-day:hover .fc-daygrid-day-number,
 body.dark-mode .itinerary-page .fc .fc-daygrid-day:focus-within .fc-daygrid-day-number,
 body.dark-mode .itinerary-page .fc .fc-daygrid-day:hover .fc-col-header-cell-cushion,
 body.dark-mode .itinerary-page .fc .fc-daygrid-day:focus-within .fc-col-header-cell-cushion {
-  color: #7fd8ee !important;
+  color: #5a9fb3 !important;
   opacity: 1 !important;
 }
 
 body.dark-mode .itinerary-page .fc .fc-day-other .fc-daygrid-day-number {
-  color: #7fd8ee !important;
+  color: #5a9fb3 !important;
   opacity: 1 !important;
 }
 
