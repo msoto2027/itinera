@@ -7,6 +7,8 @@ const DEFAULT_TRIP_RANGE_LABEL = 'Select a destination, then click Use Destinati
 let tripSettings = getTripSettings();
 let tripRangeSourceLabel = DEFAULT_TRIP_RANGE_LABEL;
 let calendar;
+let activeMapChoicePopover;
+let mapChoicePopoverCleanup;
 
 document.addEventListener('DOMContentLoaded', function() {
   loadActivities();
@@ -63,10 +65,44 @@ function addToList(activity) {
   const activityList = document.getElementById("activityList");
   const li = document.createElement("li");
   const dateStr = new Date(activity.date).toLocaleString();
-  const addressLine = activity.address ? `<br><span class="activity-address">Address: ${activity.address}</span>` : "";
-  li.innerHTML = `${activity.title} - <strong>${dateStr}</strong>${addressLine}
+  const escapedTitle = escapeHtml(activity.title);
+  const addressDetails = getAddressDetailsMarkup(activity.address);
+  li.innerHTML = `${escapedTitle} - <strong>${dateStr}</strong>${addressDetails}
                   <button onclick="deleteActivity(${activity.id})">Delete</button>`;
   activityList.appendChild(li);
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function getGoogleMapsUrl(address) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+}
+
+function getAppleMapsUrl(address) {
+  return `https://maps.apple.com/?q=${encodeURIComponent(address)}`;
+}
+
+function getAddressDetailsMarkup(address) {
+  const trimmedAddress = address ? address.trim() : '';
+  if (!trimmedAddress) {
+    return '';
+  }
+
+  const safeAddress = escapeHtml(trimmedAddress);
+  const googleMapsUrl = getGoogleMapsUrl(trimmedAddress);
+  const appleMapsUrl = getAppleMapsUrl(trimmedAddress);
+  return `<br><span class="activity-address">Address: ${safeAddress}</span>
+          <span class="activity-map-links">
+            <a href="${googleMapsUrl}" target="_blank" rel="noopener noreferrer">Google Maps</a>
+            <a href="${appleMapsUrl}" target="_blank" rel="noopener noreferrer">Apple Maps</a>
+          </span>`;
 }
 
 function getCalendarEventTitle(activity) {
@@ -110,12 +146,111 @@ function getCalendarTooltipMarkup(event) {
   const activityTitle = event.extendedProps.activityTitle || event.title || 'Untitled activity';
   const whenLabel = formatActivityDateTime(event.start);
   const address = event.extendedProps.address ? event.extendedProps.address : 'Not provided';
+  const mapHint = event.extendedProps.address ? '<div class="calendar-tooltip-line"><em>Click event to choose a map app.</em></div>' : '';
 
   return `
-    <div class="calendar-tooltip-title">${activityTitle}</div>
+    <div class="calendar-tooltip-title">${escapeHtml(activityTitle)}</div>
     <div class="calendar-tooltip-line"><strong>When:</strong> ${whenLabel}</div>
-    <div class="calendar-tooltip-line"><strong>Address:</strong> ${address}</div>
+    <div class="calendar-tooltip-line"><strong>Address:</strong> ${escapeHtml(address)}</div>
+    ${mapHint}
   `;
+}
+
+function closeMapChoicePopover() {
+  if (mapChoicePopoverCleanup) {
+    mapChoicePopoverCleanup();
+    mapChoicePopoverCleanup = null;
+  }
+
+  if (activeMapChoicePopover && activeMapChoicePopover.parentElement) {
+    activeMapChoicePopover.parentElement.removeChild(activeMapChoicePopover);
+  }
+  activeMapChoicePopover = null;
+}
+
+function positionMapChoicePopover(popover, clickEvent) {
+  const margin = 12;
+  const sourceX = clickEvent ? clickEvent.clientX : Math.round(window.innerWidth / 2);
+  const sourceY = clickEvent ? clickEvent.clientY : Math.round(window.innerHeight / 2);
+  const offsetX = 12;
+  const offsetY = 12;
+
+  const popoverRect = popover.getBoundingClientRect();
+  let left = sourceX + offsetX;
+  let top = sourceY + offsetY;
+
+  const maxLeft = window.innerWidth - popoverRect.width - margin;
+  const maxTop = window.innerHeight - popoverRect.height - margin;
+  left = Math.max(margin, Math.min(left, maxLeft));
+  top = Math.max(margin, Math.min(top, maxTop));
+
+  popover.style.left = `${left}px`;
+  popover.style.top = `${top}px`;
+}
+
+function openActivityAddressInMaps(address, clickEvent) {
+  if (!address) {
+    return;
+  }
+
+  closeMapChoicePopover();
+
+  const popover = document.createElement('div');
+  popover.className = 'map-choice-popover';
+  popover.innerHTML = `
+    <p class="map-choice-title">Open address in:</p>
+    <div class="map-choice-actions">
+      <button type="button" class="map-choice-btn" data-map="google">Google Maps</button>
+      <button type="button" class="map-choice-btn" data-map="apple">Apple Maps</button>
+      <button type="button" class="map-choice-btn map-choice-cancel" data-map="cancel">Cancel</button>
+    </div>
+  `;
+
+  document.body.appendChild(popover);
+  positionMapChoicePopover(popover, clickEvent);
+  activeMapChoicePopover = popover;
+
+  popover.querySelectorAll('.map-choice-btn').forEach((button) => {
+    button.addEventListener('click', () => {
+      const mapType = button.getAttribute('data-map');
+
+      if (mapType === 'google') {
+        window.open(getGoogleMapsUrl(address), '_blank', 'noopener,noreferrer');
+      } else if (mapType === 'apple') {
+        window.open(getAppleMapsUrl(address), '_blank', 'noopener,noreferrer');
+      }
+
+      closeMapChoicePopover();
+    });
+  });
+
+  const handleOutsideClick = (event) => {
+    if (activeMapChoicePopover && !activeMapChoicePopover.contains(event.target)) {
+      closeMapChoicePopover();
+    }
+  };
+
+  const handleEscape = (event) => {
+    if (event.key === 'Escape') {
+      closeMapChoicePopover();
+    }
+  };
+
+  const handleResize = () => {
+    closeMapChoicePopover();
+  };
+
+  window.setTimeout(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+  }, 0);
+  document.addEventListener('keydown', handleEscape);
+  window.addEventListener('resize', handleResize);
+
+  mapChoicePopoverCleanup = () => {
+    document.removeEventListener('mousedown', handleOutsideClick);
+    document.removeEventListener('keydown', handleEscape);
+    window.removeEventListener('resize', handleResize);
+  };
 }
 
 function positionCalendarTooltip(tooltip, pageX, pageY) {
@@ -538,8 +673,9 @@ function renderDayView(selectedDate) {
       minute: '2-digit'
     });
 
-    const addressLine = activity.address ? `<span class="activity-address">Address: ${activity.address}</span>` : '';
-    li.innerHTML = `<div class="day-view-main"><strong>${timeLabel}</strong> - ${activity.title}</div>${addressLine}`;
+    const safeTitle = escapeHtml(activity.title);
+    const addressLine = getAddressDetailsMarkup(activity.address);
+    li.innerHTML = `<div class="day-view-main"><strong>${timeLabel}</strong> - ${safeTitle}</div>${addressLine}`;
     dayViewList.appendChild(li);
   });
 }
@@ -616,6 +752,15 @@ function initializeCalendar() {
       info.el.addEventListener('mouseenter', () => {
         attachCalendarHoverTooltip(info);
       });
+    },
+    eventClick: function(info) {
+      const eventAddress = info.event.extendedProps.address;
+      if (!eventAddress) {
+        return;
+      }
+
+      info.jsEvent.preventDefault();
+      openActivityAddressInMaps(eventAddress, info.jsEvent);
     }
   });
   calendar.render();

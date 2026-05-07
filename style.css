@@ -883,9 +883,83 @@ li button {
 }
 
 .itinerary-page #activityList .activity-address {
+  display: block;
+  margin-top: 2px;
+  word-break: break-word;
   color: #3b6a74;
   font-size: 0.92rem;
   font-weight: 600;
+}
+
+.itinerary-page #activityList li {
+  display: block;
+  max-width: 640px;
+}
+
+.itinerary-page #activityList li button {
+  margin-top: 8px;
+}
+
+.itinerary-page .activity-map-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.itinerary-page .activity-map-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(91, 184, 200, 0.16);
+  color: #22505a;
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.itinerary-page .activity-map-links a:hover {
+  background: rgba(91, 184, 200, 0.3);
+}
+
+.map-choice-popover {
+  position: fixed;
+  z-index: 2100;
+  width: clamp(240px, 34vw, 320px);
+  max-width: calc(100vw - 24px);
+  border-radius: 12px;
+  border: 1px solid rgba(91, 184, 200, 0.5);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 12px 28px rgba(44, 88, 98, 0.24);
+  padding: 10px;
+}
+
+.map-choice-title {
+  margin: 0 0 8px;
+  color: #2a535d;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.map-choice-actions {
+  display: grid;
+  gap: 6px;
+}
+
+.map-choice-btn {
+  width: 100%;
+  box-shadow: none;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  white-space: normal;
+  line-height: 1.3;
+}
+
+.map-choice-cancel {
+  background: linear-gradient(135deg, #7f9aa1, #68868e);
 }
 
 .day-view-controls {
@@ -1368,6 +1442,25 @@ body.dark-mode .calendar-tooltip-line {
 
 body.dark-mode .itinerary-page #activityList .activity-address {
   color: #bfe4ec;
+}
+
+body.dark-mode .itinerary-page .activity-map-links a {
+  background: rgba(90, 159, 179, 0.3);
+  color: #e3f3f7;
+}
+
+body.dark-mode .itinerary-page .activity-map-links a:hover {
+  background: rgba(90, 159, 179, 0.45);
+}
+
+body.dark-mode .map-choice-popover {
+  border-color: rgba(102, 198, 216, 0.56);
+  background: rgba(19, 33, 41, 0.97);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.42);
+}
+
+body.dark-mode .map-choice-title {
+  color: #e3f3f7;
 }
 
 body.dark-mode .conversion-page {
